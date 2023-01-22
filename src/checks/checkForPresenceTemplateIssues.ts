@@ -14,8 +14,8 @@ export function checkForPresenceTemplateIssues(
   customPath?: string
 ): CheckResult {
   const TEMPLATE_FILE_PATH = customPath || '.github/ISSUE_TEMPLATE/issue.md';
-  const name = 'Check for GitHub issue template';
-  const message = 'TODO message';
+  const name = 'Issue template';
+  const message = 'Check for GitHub issue template';
 
   if (!customPath) logDefaultPathMessage(name, TEMPLATE_FILE_PATH);
 

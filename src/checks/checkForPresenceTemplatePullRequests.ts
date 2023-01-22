@@ -14,8 +14,8 @@ export function checkForPresenceTemplatePullRequests(
   customPath?: string
 ): CheckResult {
   const TEMPLATE_FILE_PATH = customPath || '.github/ISSUE_TEMPLATE/pull_request.md';
-  const name = 'Check for GitHub Pull Request template';
-  const message = 'TODO message';
+  const name = 'PR template';
+  const message = 'Check for GitHub Pull Request template';
 
   if (!customPath) logDefaultPathMessage(name, TEMPLATE_FILE_PATH);
 

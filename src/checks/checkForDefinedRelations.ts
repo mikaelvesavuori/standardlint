@@ -14,8 +14,8 @@ export function checkForDefinedRelations(
   customPath?: string
 ): CheckResult {
   const SERVICE_METADATA_FILE_PATH = customPath || 'manifest.json';
-  const name = 'Check for defined relations';
-  const message = 'TODO message';
+  const name = 'Relations';
+  const message = 'Check for defined relations';
 
   if (!customPath) logDefaultPathMessage(name, SERVICE_METADATA_FILE_PATH);
 

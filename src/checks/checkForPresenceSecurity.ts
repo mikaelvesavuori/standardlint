@@ -9,8 +9,8 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  */
 export function checkForPresenceSecurity(severity: Severity, basePath: string): CheckResult {
   const SECURITY_FILE_PATH = 'SECURITY.md';
-  const name = 'Check for SECURITY file';
-  const message = 'TODO message';
+  const name = 'Security information';
+  const message = 'Check for SECURITY file';
 
   const result = checkIfFileOrDirectoryExists(basePath, SECURITY_FILE_PATH);
 

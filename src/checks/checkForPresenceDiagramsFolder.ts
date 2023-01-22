@@ -15,8 +15,8 @@ export function checkForPresenceDiagramsFolder(
   customPath?: string
 ): CheckResult {
   const DIAGRAMS_FOLDER = customPath || 'diagrams';
-  const name = 'Check for diagrams folder with contents';
-  const message = 'TODO message';
+  const name = 'Diagrams';
+  const message = 'Check for diagrams folder with contents';
 
   if (!customPath) logDefaultPathMessage(name, DIAGRAMS_FOLDER);
 

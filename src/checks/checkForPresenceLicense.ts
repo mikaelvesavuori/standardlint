@@ -9,8 +9,8 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  */
 export function checkForPresenceLicense(severity: Severity, basePath: string): CheckResult {
   const LICENSE_FILE_PATH = 'LICENSE.md';
-  const name = 'Check for LICENSE file';
-  const message = 'TODO message';
+  const name = 'License';
+  const message = 'Check for LICENSE file';
 
   const result = checkIfFileOrDirectoryExists(basePath, LICENSE_FILE_PATH);
 

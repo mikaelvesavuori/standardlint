@@ -14,8 +14,8 @@ export function checkForDefinedTags(
   customPath?: string
 ): CheckResult {
   const SERVICE_METADATA_FILE_PATH = customPath || 'manifest.json';
-  const name = 'Check for defined tags';
-  const message = 'TODO message';
+  const name = 'Tags';
+  const message = 'Check for defined tags';
 
   if (!customPath) logDefaultPathMessage(name, SERVICE_METADATA_FILE_PATH);
 

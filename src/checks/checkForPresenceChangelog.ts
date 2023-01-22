@@ -9,8 +9,8 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  */
 export function checkForPresenceChangelog(severity: Severity, basePath: string): CheckResult {
   const CHANGELOG_FILE_PATH = 'CHANGELOG.md';
-  const name = 'Check for CHANGELOG file';
-  const message = 'TODO message';
+  const name = 'Changelog';
+  const message = 'Check for CHANGELOG file';
 
   const result = checkIfFileOrDirectoryExists(basePath, CHANGELOG_FILE_PATH);
 

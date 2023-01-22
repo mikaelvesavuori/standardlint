@@ -9,8 +9,8 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  */
 export function checkForPresenceCodeowners(severity: Severity, basePath: string): CheckResult {
   const CODEOWNERS_FILE_PATH = 'CODEOWNERS';
-  const name = 'Check for CODEOWNERS file';
-  const message = 'TODO message';
+  const name = 'CODEOWNERS';
+  const message = 'Check for CODEOWNERS file';
 
   const result = checkIfFileOrDirectoryExists(basePath, CODEOWNERS_FILE_PATH);
 

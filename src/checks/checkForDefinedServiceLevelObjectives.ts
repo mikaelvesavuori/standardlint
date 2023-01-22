@@ -14,8 +14,8 @@ export function checkForDefinedServiceLevelObjectives(
   customPath?: string
 ): CheckResult {
   const SERVICE_METADATA_FILE_PATH = customPath || 'manifest.json';
-  const name = 'Check for defined Service Level Objectives';
-  const message = 'TODO message';
+  const name = 'SLOs';
+  const message = 'Check for defined Service Level Objectives';
 
   if (!customPath) logDefaultPathMessage(name, SERVICE_METADATA_FILE_PATH);
 

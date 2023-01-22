@@ -14,8 +14,8 @@ export function checkForPresenceApiSchema(
   customPath?: string
 ): CheckResult {
   const API_SCHEMA_PATH = customPath || 'api/schema.json';
-  const name = 'Check for API schema';
-  const message = 'TODO message';
+  const name = 'API schema';
+  const message = 'Check for API schema';
 
   if (!customPath) logDefaultPathMessage(name, API_SCHEMA_PATH);
 

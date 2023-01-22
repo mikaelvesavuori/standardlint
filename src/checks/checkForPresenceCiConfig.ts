@@ -14,8 +14,8 @@ export function checkForPresenceCiConfig(
   customPath?: string
 ): CheckResult {
   const CONFIG_PATH = customPath || '.github/workflows/main.yml';
-  const name = 'Check for CI configuration file';
-  const message = 'TODO message';
+  const name = 'CI configuration';
+  const message = 'Check for CI configuration file';
 
   if (!customPath) logDefaultPathMessage(name, CONFIG_PATH);
 

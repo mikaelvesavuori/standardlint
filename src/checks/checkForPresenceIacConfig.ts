@@ -14,8 +14,8 @@ export function checkForPresenceIacConfig(
   customPath?: string
 ): CheckResult {
   const IAC_CONFIG_PATH = customPath || 'serverless.yml';
-  const name = 'Check for Infrastructure-as-Code configuration';
-  const message = 'TODO message';
+  const name = 'IAC configuration';
+  const message = 'Check for Infrastructure-as-Code configuration';
 
   if (!customPath) logDefaultPathMessage(name, IAC_CONFIG_PATH);
 

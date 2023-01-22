@@ -14,8 +14,8 @@ export function checkForPresenceServiceMetadata(
   customPath?: string
 ): CheckResult {
   const SERVICE_METADATA_FILE_PATH = customPath || 'manifest.json';
-  const name = 'Check for service metadata file';
-  const message = 'TODO message';
+  const name = 'Service metadata';
+  const message = 'Check for service metadata file';
 
   if (!customPath) logDefaultPathMessage(name, SERVICE_METADATA_FILE_PATH);
 

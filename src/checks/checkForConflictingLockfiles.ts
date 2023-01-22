@@ -8,8 +8,8 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  * @description Checks if there are conflicting Node package lock files.
  */
 export function checkForConflictingLockfiles(severity: Severity, basePath: string): CheckResult {
-  const name = 'Check for conflicting lock files';
-  const message = 'TODO message';
+  const name = 'License';
+  const message = 'Check for conflicting lock files';
 
   const npmLockfile = checkIfFileOrDirectoryExists(basePath, 'package-lock.json');
   const yarnLockfile = checkIfFileOrDirectoryExists(basePath, 'yarn.lock');

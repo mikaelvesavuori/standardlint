@@ -9,8 +9,8 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  */
 export function checkForPresenceReadme(severity: Severity, basePath: string): CheckResult {
   const README_FILE_PATH = 'README.md';
-  const name = 'Check for README file';
-  const message = 'TODO message';
+  const name = 'Documentation';
+  const message = 'Check for README file';
 
   const result = checkIfFileOrDirectoryExists(basePath, README_FILE_PATH);
 
