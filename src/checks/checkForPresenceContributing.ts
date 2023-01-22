@@ -9,7 +9,7 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
  */
 export function checkForPresenceContributing(severity: Severity, basePath: string): CheckResult {
   const CONTRIBUTING_FILE_PATH = 'CONTRIBUTING.md';
-  const name = 'CONTRIBUTING';
+  const name = 'Contribution information';
   const message = 'Check for CONTRIBUTING file';
 
   const result = checkIfFileOrDirectoryExists(basePath, CONTRIBUTING_FILE_PATH);
