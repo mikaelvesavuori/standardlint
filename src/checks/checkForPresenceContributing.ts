@@ -5,7 +5,7 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there is a `CONTRIBUTING.md` file.
  */
 export function checkForPresenceContributing(severity: Severity, basePath: string): CheckResult {
   const CONTRIBUTING_FILE_PATH = 'CONTRIBUTING.md';

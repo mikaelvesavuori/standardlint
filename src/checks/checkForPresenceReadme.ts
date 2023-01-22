@@ -5,7 +5,7 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there is a `README.md` file.
  */
 export function checkForPresenceReadme(severity: Severity, basePath: string): CheckResult {
   const README_FILE_PATH = 'README.md';

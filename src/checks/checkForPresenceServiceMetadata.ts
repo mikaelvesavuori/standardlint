@@ -6,7 +6,7 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
- * @description TODO
+ * @description Checks if there a service metadata file present.
  */
 export function checkForPresenceServiceMetadata(
   severity: Severity,

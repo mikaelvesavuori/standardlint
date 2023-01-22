@@ -5,7 +5,7 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there is a `SECURITY.md` file.
  */
 export function checkForPresenceSecurity(severity: Severity, basePath: string): CheckResult {
   const SECURITY_FILE_PATH = 'SECURITY.md';

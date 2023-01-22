@@ -1,5 +1,5 @@
 /**
- * @description TODO
+ * @description The shape of a standalone Check.
  */
 export type Check = {
   name: string;
@@ -8,7 +8,7 @@ export type Check = {
 };
 
 /**
- * @description TODO
+ * @description The output of running a Check.
  */
 export type CheckResult = {
   name: string;
@@ -18,11 +18,11 @@ export type CheckResult = {
 };
 
 /**
- * @description TODO
+ * @description Represents the final state of running a check.
  */
 export type Status = 'pass' | 'warn' | 'fail';
 
 /**
- * @description TODO
+ * @description Represents how severe a non-passing state is.
  */
 export type Severity = 'error' | 'warn';

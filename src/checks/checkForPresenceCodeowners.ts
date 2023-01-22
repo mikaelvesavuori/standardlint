@@ -5,10 +5,10 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there is a `CODEOWNERS` file.
  */
 export function checkForPresenceCodeowners(severity: Severity, basePath: string): CheckResult {
-  const CODEOWNERS_FILE_PATH = 'CODEOWNERS.md';
+  const CODEOWNERS_FILE_PATH = 'CODEOWNERS';
   const name = 'Check for CODEOWNERS file';
   const message = 'TODO message';
 

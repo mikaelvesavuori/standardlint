@@ -1,7 +1,7 @@
 import { Check, CheckResult, Severity } from './Check';
 
 /**
- * @description TODO
+ * @description The `Yardstick` configuration.
  */
 export type Configuration = {
   /**
@@ -9,17 +9,18 @@ export type Configuration = {
    */
   basePath: string;
   /**
-   * @description TODO
+   * @description The list of checks the user wants to run.
    */
   checks: Check[];
   /**
-   * @description TODO
+   * @description Unless checks have specific Severity levels, this will be the
+   * default fallback level.
    */
   defaultSeverity: Severity;
 };
 
 /**
- * @description TODO
+ * @description User input for running `Yardstick`.
  */
 export type ConfigurationInput = {
   basePath?: string;
@@ -28,23 +29,23 @@ export type ConfigurationInput = {
 };
 
 /**
- * @description TODO
+ * @description The final output of `Yardstick` and its checks.
  */
 export type Result = {
   /**
-   * @description TODO
+   * @description How many checks passed?
    */
   passes: number;
   /**
-   * @description TODO
+   * @description How many checks resulted in warnings?
    */
   warnings: number;
   /**
-   * @description TODO
+   * @description How many checks resulted in failure?
    */
   failures: number;
   /**
-   * @description TODO
+   * @description A list of all individual check results.
    */
   results: CheckResult[];
 };

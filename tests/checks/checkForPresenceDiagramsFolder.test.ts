@@ -38,7 +38,7 @@ test('It should error when missing a folder with solution diagrams', (t) => {
   t.deepEqual(result, expected);
 });
 
-test('It should TODO when using a non-existent directory', (t) => {
+test('It should fail when using a non-existent directory', (t) => {
   const expected = 'fail';
 
   const yardstick = createNewYardstick({

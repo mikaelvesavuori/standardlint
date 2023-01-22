@@ -5,7 +5,7 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there is a `CHANGELOG.md` file.
  */
 export function checkForPresenceChangelog(severity: Severity, basePath: string): CheckResult {
   const CHANGELOG_FILE_PATH = 'CHANGELOG.md';

@@ -29,14 +29,14 @@ const DEFAULT_BASE_PATH_FALLBACK = '.';
 const DEFAULT_SEVERITY_FALLBACK = 'error';
 
 /**
- * @description TODO
+ * @description Factory function to return a new `Yardstick` instance.
  */
 export function createNewYardstick(config?: ConfigurationInput) {
   return new Yardstick(config);
 }
 
 /**
- * @description TODO
+ * @description `Yardstick` is an extensible standards auditor.
  */
 export class Yardstick {
   readonly config: Configuration;
@@ -46,7 +46,7 @@ export class Yardstick {
   }
 
   /**
-   * @description TODO
+   * @description Validates and sanitizes user input and returns a valid Configuration.
    */
   private makeConfig(configInput?: ConfigurationInput): Configuration {
     const config: Record<string, any> = {};
@@ -67,7 +67,7 @@ export class Yardstick {
   }
 
   /**
-   * @description TODO
+   * @description Validates and sanitizes a requested Severity level.
    */
   private getValidatedSeverityLevel(severity: Severity): Severity {
     const validSeverityLevels = ['warn', 'error'];
@@ -77,7 +77,7 @@ export class Yardstick {
   }
 
   /**
-   * @description TODO
+   * @description Validates and sanitizes a requested list of checks.
    *
    * Provide `defaultSeverity` as it's not yet available in the class `config` object
    * when running the validation.
@@ -196,7 +196,7 @@ export class Yardstick {
   }
 
   /**
-   * @description TODO
+   * @description Outputs a log with the check result.
    */
   private logResult(checkResult: CheckResult) {
     const { status, name } = checkResult;

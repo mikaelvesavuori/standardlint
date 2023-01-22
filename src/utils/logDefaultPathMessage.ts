@@ -1,5 +1,5 @@
 /**
- * @description TODO
+ * @description Outputs a warning log when a default path is being used.
  */
 export function logDefaultPathMessage(checkName: string, path: string) {
   console.warn(

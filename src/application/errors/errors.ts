@@ -1,5 +1,5 @@
 /**
- * @description TODO
+ * @description Used when Yardstick is being run but no checks are defined.
  */
 export class MissingChecksError extends Error {
   constructor() {

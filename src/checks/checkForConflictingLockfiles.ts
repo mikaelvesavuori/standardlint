@@ -5,7 +5,7 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there are conflicting Node package lock files.
  */
 export function checkForConflictingLockfiles(severity: Severity, basePath: string): CheckResult {
   const name = 'Check for conflicting lock files';

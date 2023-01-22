@@ -5,7 +5,7 @@ import { calculatePass } from '../application/calculatePass';
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 /**
- * @description TODO
+ * @description Checks if there is a `LICENSE.md` file.
  */
 export function checkForPresenceLicense(severity: Severity, basePath: string): CheckResult {
   const LICENSE_FILE_PATH = 'LICENSE.md';

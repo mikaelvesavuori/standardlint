@@ -6,7 +6,7 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
- * @description TODO
+ * @description Checks if there is Infrastructure-as-Code configuration present.
  */
 export function checkForPresenceIacConfig(
   severity: Severity,

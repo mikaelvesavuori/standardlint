@@ -6,7 +6,7 @@ import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 import { getJSONFileContents } from '../utils/getJSONFileContents';
 
 /**
- * @description TODO
+ * @description Checks if the service metadata defines Service Level Objectives.
  */
 export function checkForDefinedServiceLevelObjectives(
   severity: Severity,
