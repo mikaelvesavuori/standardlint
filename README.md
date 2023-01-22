@@ -6,7 +6,7 @@
 
 ---
 
-> A fact or standard by which you can judge the success or value of something
+> A fact or standard by which you can judge the success or value of something.
 
 — [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/yardstick)
 
