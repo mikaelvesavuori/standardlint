@@ -24,21 +24,17 @@
     "test:types": "npx type-coverage --at-least 97 --strict --ignore-files \"tests/**/*.ts\" --ignore-files \"*.ts\" --ignore-files \"src/application/errors/*.ts\" --ignore-files \"testdata/*.ts\"",
     "test:licenses": "npx license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
     "test:unit": "npx c8 -reporter=lcov ava",
-    "build": "npm run build:clean && npm run build:ncc",
-    "build:clean": "rm -rf dist && mkdir -p dist",
-    "build:ncc": "npx ncc build index.ts --license licenses.txt"
-  },
-  "dependencies": {
-    "@actions/core": "1",
-    "@actions/github": "5",
-    "@octokit/action": "4"
+    "build": "npm run clean && npx tsc --project tsconfig.build.json",
+    "clean": "rm -rf lib",
+    "package": "npm pack",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@ava/typescript": "3",
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "5",
     "@typescript-eslint/parser": "5",
-    "@vercel/ncc": "^0.36.0",
     "ava": "5",
     "c8": "7",
     "eslint": "8",
