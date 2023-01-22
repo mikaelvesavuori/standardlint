@@ -1,6 +1,6 @@
 # Yardstick 📏
 
-![Build Status](https://github.com/mikaelvesavuori/yardstick/workflows/main/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mikaelvesavuori_yardstick&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mikaelvesavuori_yardstick) [![CodeScene Code Health](https://codescene.io/projects/33250/status-badges/code-health)](https://codescene.io/projects/33250) [![CodeScene System Mastery](https://codescene.io/projects/33250/status-badges/system-mastery)](https://codescene.io/projects/33250) [![codecov](https://codecov.io/gh/mikaelvesavuori/yardstick/branch/main/graph/badge.svg?token=1VZWBO88Q8)](https://codecov.io/gh/mikaelvesavuori/yardstick) [![Maintainability](https://api.codeclimate.com/v1/badges/adb152e805d9447c83b2/maintainability)](https://codeclimate.com/github/mikaelvesavuori/yardstick/maintainability)
+![Build Status](https://github.com/mikaelvesavuori/yardstick/workflows/main/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mikaelvesavuori_yardstick&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mikaelvesavuori_yardstick) [![CodeScene Code Health](https://codescene.io/projects/34030/status-badges/code-health)](https://codescene.io/projects/34030) [![CodeScene System Mastery](https://codescene.io/projects/34030/status-badges/system-mastery)](https://codescene.io/projects/34030) [![codecov](https://codecov.io/gh/mikaelvesavuori/yardstick/branch/main/graph/badge.svg?token=1VZWBO88Q8)](https://codecov.io/gh/mikaelvesavuori/yardstick) [![Maintainability](https://api.codeclimate.com/v1/badges/540fd112dc4d0dc9ebf2/maintainability)](https://codeclimate.com/github/mikaelvesavuori/yardstick/maintainability)
 
 ## Extensible standards auditing tool.
 
@@ -38,7 +38,7 @@ TODO
   - Do you have relations defined?
   - Do you have tags defined?
 
---
+---
 
 ## Ideas for improvements
 
