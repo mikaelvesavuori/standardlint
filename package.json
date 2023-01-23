@@ -1,7 +1,7 @@
 {
-  "name": "yardstick-test",
+  "name": "standardlint",
   "description": "TODO",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -12,20 +12,30 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mikaelvesavuori/yardstick"
+    "url": "git+https://github.com/mikaelvesavuori/standardlint"
   },
   "bugs": {
-    "url": "https://github.com/mikaelvesavuori/yardstick/issues"
+    "url": "https://github.com/mikaelvesavuori/standardlint/issues"
   },
-  "homepage": "https://github.com/mikaelvesavuori/yardstick",
+  "homepage": "https://github.com/mikaelvesavuori/standardlint",
+  "files": [
+    "/dist",
+    "!/dist/**/*.map",
+    "!/tests"
+  ],
+  "bin": {
+    "standardlint": "dist/index.js"
+  },
   "scripts": {
     "start": "npx ts-node src/test.ts",
     "test": "npm run test:licenses && npm run test:types && npm run test:unit",
     "test:types": "npx type-coverage --at-least 97 --strict --ignore-files \"tests/**/*.ts\" --ignore-files \"*.ts\" --ignore-files \"src/application/errors/*.ts\" --ignore-files \"testdata/*.ts\"",
     "test:licenses": "npx license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
     "test:unit": "npx c8 -reporter=lcov ava",
-    "build": "npm run clean && npx tsc --project tsconfig.build.json",
-    "clean": "rm -rf lib",
+    "build": "npm run clean && npm run build:ncc",
+    "build:ncc": "npx ncc build src/index.ts --license licenses.txt",
+    "build:ts": "npx tsc --project tsconfig.build.json",
+    "clean": "rm -rf dist && mkdir -p dist",
     "package": "npm pack",
     "prepublishOnly": "npm run build",
     "prepare": "husky install"
@@ -35,6 +45,7 @@
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "5",
     "@typescript-eslint/parser": "5",
+    "@vercel/ncc": "^0.36.0",
     "ava": "5",
     "c8": "7",
     "eslint": "8",

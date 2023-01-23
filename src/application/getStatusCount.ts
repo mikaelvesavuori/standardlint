@@ -1,9 +1,11 @@
+import { CheckResult } from '../interface/Check';
+
 /**
  * @description Gets the number of count for a given status.
  */
-export const getStatusCount = (status: string, results: Record<string, any>) =>
+export const getStatusCount = (status: string, results: CheckResult[]) =>
   results
-    .map((result: Record<string, any>) => {
+    .map((result: CheckResult) => {
       if (result.status === status) return result.status;
     })
-    .filter((result: any) => result).length;
+    .filter((result) => result).length;

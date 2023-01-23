@@ -1,5 +1,5 @@
 import { CheckResult, Check, Severity } from '../interface/Check';
-import { Configuration, ConfigurationInput, Result } from '../interface/Yardstick';
+import { Configuration, ConfigurationInput, Result } from '../interface/StandardLint';
 
 import { getStatusCount } from '../application/getStatusCount';
 
@@ -29,16 +29,16 @@ const DEFAULT_BASE_PATH_FALLBACK = '.';
 const DEFAULT_SEVERITY_FALLBACK = 'error';
 
 /**
- * @description Factory function to return a new `Yardstick` instance.
+ * @description Factory function to return a new `StandardLint` instance.
  */
-export function createNewYardstick(config?: ConfigurationInput) {
-  return new Yardstick(config);
+export function createNewStandardLint(config?: ConfigurationInput) {
+  return new StandardLint(config);
 }
 
 /**
- * @description `Yardstick` is an extensible standards auditor.
+ * @description `StandardLint` is an extensible standards auditor.
  */
-export class Yardstick {
+export class StandardLint {
   readonly config: Configuration;
 
   constructor(config?: ConfigurationInput) {
@@ -49,9 +49,7 @@ export class Yardstick {
    * @description Validates and sanitizes user input and returns a valid Configuration.
    */
   private makeConfig(configInput?: ConfigurationInput): Configuration {
-    const config: Record<string, any> = {};
-
-    config.basePath =
+    const basePath =
       configInput?.basePath && checkIfFileOrDirectoryExists(configInput.basePath)
         ? configInput.basePath
         : DEFAULT_BASE_PATH_FALLBACK;
@@ -59,11 +57,15 @@ export class Yardstick {
     const defaultSeverity = configInput?.defaultSeverity
       ? this.getValidatedSeverityLevel(configInput.defaultSeverity)
       : DEFAULT_SEVERITY_FALLBACK;
-    config.defaultSeverity = defaultSeverity;
 
-    config.checks = this.getValidatedChecks(configInput?.checks || [], defaultSeverity);
+    const checkList = Array.isArray(configInput?.checks) ? configInput?.checks : [];
+    const checks = this.getValidatedChecks(checkList as Check[], defaultSeverity);
 
-    return config as Configuration;
+    return {
+      basePath,
+      checks,
+      defaultSeverity
+    } as Configuration;
   }
 
   /**
@@ -142,7 +144,7 @@ export class Yardstick {
   public check(): Result {
     if (this.config.checks.length === 0) throw new MissingChecksError();
 
-    const results = this.config.checks.map((check: Check) => this.test(check));
+    const results: CheckResult[] = this.config.checks.map((check: Check) => this.test(check));
 
     return {
       passes: getStatusCount('pass', results),

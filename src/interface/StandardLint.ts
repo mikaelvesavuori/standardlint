@@ -1,7 +1,7 @@
 import { Check, CheckResult, Severity } from './Check';
 
 /**
- * @description The `Yardstick` configuration.
+ * @description The `StandardLint` configuration.
  */
 export type Configuration = {
   /**
@@ -20,7 +20,7 @@ export type Configuration = {
 };
 
 /**
- * @description User input for running `Yardstick`.
+ * @description User input for running `StandardLint`.
  */
 export type ConfigurationInput = {
   basePath?: string;
@@ -29,7 +29,7 @@ export type ConfigurationInput = {
 };
 
 /**
- * @description The final output of `Yardstick` and its checks.
+ * @description The final output of `StandardLint` and its checks.
  */
 export type Result = {
   /**

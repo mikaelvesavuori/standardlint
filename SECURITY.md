@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-These versions of `yardstick` are currently being supported with security updates.
+These versions of `StandardLint` are currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |

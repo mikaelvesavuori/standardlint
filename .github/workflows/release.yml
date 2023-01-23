@@ -41,11 +41,20 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Codecov
-        uses: codecov/codecov-action@v3
-
-      - name: Send coverage report with Code Climate
-        uses: paambaati/codeclimate-action@v3.2.0
+  publish-npm:
+    needs: ['build-and-test']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          npm ci --ignore-scripts
+          npm run build
+          git config --global user.email ${{ secrets.GIT_EMAIL }}
+          git config --global user.name ${{ secrets.GIT_NAME }}
+          npm publish
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          coverageLocations: ${{ github.workspace }}/coverage/lcov.info:lcov
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

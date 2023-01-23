@@ -1,14 +1,15 @@
-# Yardstick 📏
+# StandardLint 📏
 
-![Build Status](https://github.com/mikaelvesavuori/yardstick/workflows/main/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mikaelvesavuori_yardstick&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mikaelvesavuori_yardstick) [![CodeScene Code Health](https://codescene.io/projects/34030/status-badges/code-health)](https://codescene.io/projects/34030) [![CodeScene System Mastery](https://codescene.io/projects/34030/status-badges/system-mastery)](https://codescene.io/projects/34030) [![codecov](https://codecov.io/gh/mikaelvesavuori/yardstick/branch/main/graph/badge.svg?token=1VZWBO88Q8)](https://codecov.io/gh/mikaelvesavuori/yardstick) [![Maintainability](https://api.codeclimate.com/v1/badges/540fd112dc4d0dc9ebf2/maintainability)](https://codeclimate.com/github/mikaelvesavuori/yardstick/maintainability)
+![Build Status](https://github.com/mikaelvesavuori/standardlint/workflows/main/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mikaelvesavuori_standardlint&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mikaelvesavuori_standardlint) [![CodeScene Code Health](https://codescene.io/projects/34030/status-badges/code-health)](https://codescene.io/projects/34030) [![CodeScene System Mastery](https://codescene.io/projects/34030/status-badges/system-mastery)](https://codescene.io/projects/34030) [![codecov](https://codecov.io/gh/mikaelvesavuori/standardlint/branch/main/graph/badge.svg?token=LDZV8XOA4X)](https://codecov.io/gh/mikaelvesavuori/standardlint) [![Maintainability](https://api.codeclimate.com/v1/badges/540fd112dc4d0dc9ebf2/maintainability)](https://codeclimate.com/github/mikaelvesavuori/standardlint/maintainability)
 
-## Extensible standards auditing tool.
+## Extensible standards auditing and linting tool. Nags like your mother but is probably a lot more technical.
 
 ---
 
-> A fact or standard by which you can judge the success or value of something.
+With StandardLint, you use _Checks_ to inform what standards you want to inspect, in effect being your standards _yardstick_:
 
-— [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/yardstick)
+> A fact or standard by which you can judge the success or value of something.
+> — [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/standardlint)
 
 TODO
 
@@ -46,3 +47,4 @@ TODO
   - Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
 - Did you update docs (Markdown)?
 - Did you update API schema (YAML/JSON)?
+- CLI?
