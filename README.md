@@ -33,9 +33,9 @@ The format is:
 
 | Key               | Required | Default         | Example                       | Description                                                             |
 | ----------------- | -------- | --------------- | ----------------------------- | ----------------------------------------------------------------------- |
-| `basePath`        | No       | `.`             | `./project_dir/`              | Sets the base path for any file lookups                                 |
-| `checks`          | Yes      | -               | `["checkForPresenceLicense"]` | A list of checks to run, either using string or object form             |
-| `defaultSeverity` | No       | `error`         | `warn`                        | Sets the default severity level for any issues                          |
+| `basePath`        | No       | `.`             | `./project_dir/`              | Sets the base path for any file lookups.                                |
+| `checks`          | Yes      | -               | `["checkForPresenceLicense"]` | A list of checks to run, either using string or object form.            |
+| `defaultSeverity` | No       | `error`         | `warn`                        | Sets the default severity level for any issues.                         |
 | `path`            | No       | Multiple values | `api/schema.yml`              | Sets the exact path to a resource. Only used optionally by some checks. |
 
 #### Base path

@@ -2,11 +2,8 @@ name: main
 
 on:
   push:
-    branch:
-      - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - "v*"
 
 jobs:
   build-and-test:
