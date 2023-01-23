@@ -11,6 +11,33 @@ With StandardLint, you use _Checks_ to inform what standards you want to inspect
 > A fact or standard by which you can judge the success or value of something.
 > — [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english/standardlint)
 
+StandardLint makes it convenient and easy to set up guardrails and guidelines for development teams and making sure they follow your house conventions.
+
+The result of a run could look like this:
+
+```
+✅ PASS: Diagrams
+✅ PASS: Changelog
+🛎️  No custom path assigned to check "Diagrams" - Using default path "diagrams"...
+⚠️ WARN: Diagrams
+✅ PASS: Lock files
+✅ PASS: License
+❌ FAIL: Code owners
+❌ FAIL: Contribution information
+🛎️  No custom path assigned to check "IAC configuration" - Using default path "serverless.yml"...
+✅ PASS: IAC configuration
+🛎️  No custom path assigned to check "IAC configuration" - Using default path "serverless.yml"...
+⚠️ WARN: SLOs
+🛎️  No custom path assigned to check "SLOs" - Using default path "manifest.json"...
+✅ PASS: Tags
+🛎️  No custom path assigned to check "Tags" - Using default path "manifest.json"...
+🛎️  No custom path assigned to check "CI configuration" - Using default path ".github/workflows/main.yml"...
+✅ PASS: CI configuration
+✅ PASS: Security information
+🛎️  No custom path assigned to check "Service metadata" - Using default path "manifest.json"...
+✅ PASS: Service metadata
+```
+
 ## Usage
 
 ### Installation
