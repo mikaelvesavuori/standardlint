@@ -7,7 +7,7 @@ import { getDirectoryContents } from '../utils/getDirectoryContents';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
- * @description Checks if there is diagrams folder with diagram files in it.
+ * @description Checks if there is a diagrams folder with diagram files in it.
  */
 export function checkForPresenceDiagramsFolder(
   severity: Severity,
