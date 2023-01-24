@@ -5,7 +5,10 @@ import { createNewStandardLint } from './domain/StandardLint';
 import { checkIfFileOrDirectoryExists } from './utils/checkIfFileOrDirectoryExists';
 import { getJSONFileContents } from './utils/getJSONFileContents';
 
-async function main() {
+function main() {
+  const isRunFromCommandLine = process.argv[1].includes('node_modules/.bin/standardlint');
+  if (!isRunFromCommandLine) return;
+
   try {
     console.log('Running StandardLint...');
 
@@ -21,3 +24,5 @@ async function main() {
 }
 
 main();
+
+export { createNewStandardLint } from './domain/StandardLint';

@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -34,7 +34,6 @@
     "test:unit": "npx c8 -reporter=lcov ava",
     "build": "npm run clean && npm run build:ncc",
     "build:ncc": "npx ncc build src/index.ts --license licenses.txt",
-    "build:ts": "npx tsc --project tsconfig.build.json",
     "clean": "rm -rf dist && mkdir -p dist",
     "package": "npm pack",
     "prepublishOnly": "npm run build",
@@ -62,7 +61,7 @@
   "ava": {
     "typescript": {
       "rewritePaths": {
-        "src/": "lib/"
+        "src/": "dist/"
       },
       "compile": false
     },

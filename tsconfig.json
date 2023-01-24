@@ -19,6 +19,6 @@
     "strict": true,
     "strictFunctionTypes": true
   },
-  "include": ["./src/**/*.ts", "./tests/**/*.ts"],
-  "exclude": ["./node_modules/", "./lib/"]
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./node_modules/", "./lib/", "./dist/"]
 }

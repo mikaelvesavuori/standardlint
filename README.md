@@ -93,7 +93,35 @@ This can be either `warn` or `error` (the default value). Using it in `error` mo
 
 ### Usage
 
-It's super easy to use StandardLint! Just run `npx standardlint` and it will use the configuration in your project.
+#### From the command line
+
+It's super easy to use StandardLint from the CLI! Just run `npx standardlint` and it will use the configuration in your project.
+
+_Currently StandardLint does not take CLI input beyond reading the configuration file._
+
+#### Importing StandardLint as a Node package
+
+You can also import and use StandardLint like a conventional Node package.
+
+It exposes a factory function to vend a new `StandardLint` instance with a `check()` method.
+
+If using it as an imported package, you will need to provide either a configuration file (for example loaded with `fs`) or the actual configuration as an object.
+
+```ts
+import { createNewStandardLint } from 'standardlint';
+
+const config = {
+  checks: [
+    { name: 'checkForPresenceContributing', severity: 'warn' },
+    { name: 'checkForPresenceLicense', severity: 'error' }
+  ]
+};
+
+const standardLint = createNewStandardLint(config);
+const results = standardLint.check();
+
+console.log(results);
+```
 
 ## Available checks
 

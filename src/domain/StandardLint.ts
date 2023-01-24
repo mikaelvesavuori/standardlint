@@ -25,6 +25,7 @@ import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExi
 
 import { MissingChecksError } from '../application/errors/errors';
 
+// Configuration
 const DEFAULT_BASE_PATH_FALLBACK = '.';
 const DEFAULT_SEVERITY_FALLBACK = 'error';
 
@@ -36,9 +37,9 @@ export function createNewStandardLint(config?: ConfigurationInput) {
 }
 
 /**
- * @description `StandardLint` is an extensible standards auditor.
+ * @description `StandardLint` is an extensible standards linter and auditor.
  */
-export class StandardLint {
+class StandardLint {
   readonly config: Configuration;
 
   constructor(config?: ConfigurationInput) {
