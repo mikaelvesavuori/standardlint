@@ -7,7 +7,14 @@
   "keywords": [
     "devops",
     "software-delivery",
-    "ci-checks"
+    "ci-checks",
+    "linter",
+    "audit",
+    "test-automation",
+    "standards",
+    "compliance",
+    "auditor",
+    "engops"
   ],
   "main": "dist/index.js",
   "repository": {

@@ -37,6 +37,10 @@ The result of a run could look like this:
 ✅ PASS: Service metadata
 ```
 
+## StandardLint GitHub Action
+
+There's a ready-to-use [StandardLint GitHub Action](https://github.com/marketplace/actions/standardlint-action) in the Marketplace if you really want the minimum hassle. Plus, you get a great visual overview of your checks!
+
 ## Usage
 
 ### Installation
