@@ -1,6 +1,8 @@
 # Files
 .env
 .dccache
+standardlint.json
+standardlint.results.json
 
 # Folders
 node_modules/

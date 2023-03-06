@@ -1,6 +1,27 @@
 import test from 'ava';
+import fs from 'fs';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
+
+test('It should check the provided checks', (t) => {
+  const standardlint = createNewStandardLint({
+    checks: ['checkForPresenceContributing']
+  });
+  standardlint.check();
+
+  t.pass();
+});
+
+test('It should check the provided checks and output the results to a JSON file', (t) => {
+  const standardlint = createNewStandardLint({
+    checks: ['checkForPresenceContributing']
+  });
+  standardlint.check(true);
+
+  const result = fs.existsSync(`${process.cwd()}/standardlint.results.json`);
+
+  t.is(result, true);
+});
 
 test('It should set the base path if the provided directory path exists', (t) => {
   const expected = 'tests';

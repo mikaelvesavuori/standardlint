@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -51,7 +51,7 @@
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "5",
     "@typescript-eslint/parser": "5",
-    "@vercel/ncc": "^0.36.0",
+    "@vercel/ncc": "0",
     "ava": "5",
     "c8": "7",
     "eslint": "8",

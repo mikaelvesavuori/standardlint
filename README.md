@@ -101,7 +101,9 @@ This can be either `warn` or `error` (the default value). Using it in `error` mo
 
 It's super easy to use StandardLint from the CLI! Just run `npx standardlint` and it will use the configuration in your project.
 
-_Currently StandardLint does not take CLI input beyond reading the configuration file._
+##### Outputting results into a JSON file
+
+To output the results into `standardlint.results.json`, run `npx standardlint --output`.
 
 #### Importing StandardLint as a Node package
 
@@ -125,6 +127,15 @@ const standardLint = createNewStandardLint(config);
 const results = standardLint.check();
 
 console.log(results);
+```
+
+##### Outputting results into a JSON file
+
+To output the results into `standardlint.results.json`, run:
+
+```ts
+const standardLint = createNewStandardLint(config);
+const results = standardLint.check(true); // <--- Adding true here will output the results to disk
 ```
 
 ## Available checks

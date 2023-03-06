@@ -24,6 +24,7 @@ import { checkForPresenceTemplatePullRequests } from '../checks/checkForPresence
 import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
 
 import { MissingChecksError } from '../application/errors/errors';
+import { writeResultsToDisk } from '../utils/writeResultsToDisk';
 
 // Configuration
 const DEFAULT_BASE_PATH_FALLBACK = '.';
@@ -142,17 +143,21 @@ class StandardLint {
   /**
    * @description Orchestrates the running of all checks.
    */
-  public check(): Result {
+  public check(writeOutputToDisk = false): Result {
     if (this.config.checks.length === 0) throw new MissingChecksError();
 
     const results: CheckResult[] = this.config.checks.map((check: Check) => this.test(check));
 
-    return {
+    const checkResults = {
       passes: getStatusCount('pass', results),
       warnings: getStatusCount('warn', results),
       failures: getStatusCount('fail', results),
       results
     };
+
+    if (writeOutputToDisk) writeResultsToDisk(checkResults);
+
+    return checkResults;
   }
 
   /**
