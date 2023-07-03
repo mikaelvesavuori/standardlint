@@ -245,6 +245,14 @@ Checks:
 - Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
 - Did you update docs (Markdown)?
 - Did you update API schema (YAML/JSON)?
+- More ArchUnit/fitness functions kind of support?
+- Ensure console.log() is not used
+- Ensure imports following acceptable conventions
+- No cyclic methods/dependencies
+- Ensure there are tests
+- Documentation coverage
+- Ensure methods/functions are below a certain threshold in terms of lines of code
+- Support for external config
 
 Tech:
 
