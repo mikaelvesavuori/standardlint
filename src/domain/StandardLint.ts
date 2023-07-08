@@ -1,4 +1,4 @@
-import { CheckResult, Check, Severity } from '../interface/Check';
+import { CheckResult, Check, Severity, CheckInput } from '../interface/Check';
 import { Configuration, ConfigurationInput, Result } from '../interface/StandardLint';
 
 import { getStatusCount } from '../application/getStatusCount';
@@ -28,10 +28,6 @@ import { exists } from '../utils/exists';
 import { MissingChecksError } from '../application/errors/errors';
 import { writeResultsToDisk } from '../utils/writeResultsToDisk';
 
-// Configuration
-const DEFAULT_BASE_PATH_FALLBACK = '.';
-const DEFAULT_SEVERITY_FALLBACK = 'error';
-
 /**
  * @description Factory function to return a new `StandardLint` instance.
  */
@@ -43,6 +39,8 @@ export function createNewStandardLint(config?: ConfigurationInput) {
  * @description `StandardLint` is an extensible standards linter and auditor.
  */
 class StandardLint {
+  private readonly defaultBasePathFallback = '.';
+  private readonly defaultSeverityFallback = 'error';
   readonly config: Configuration;
 
   constructor(config?: ConfigurationInput) {
@@ -56,14 +54,14 @@ class StandardLint {
     const basePath =
       configInput?.basePath && exists(configInput.basePath)
         ? configInput.basePath
-        : DEFAULT_BASE_PATH_FALLBACK;
+        : this.defaultBasePathFallback;
 
     const defaultSeverity = configInput?.defaultSeverity
       ? this.getValidatedSeverityLevel(configInput.defaultSeverity)
-      : DEFAULT_SEVERITY_FALLBACK;
+      : this.defaultSeverityFallback;
 
     const checkList = Array.isArray(configInput?.checks) ? configInput?.checks : [];
-    const checks = this.getValidatedChecks(checkList as Check[], defaultSeverity);
+    const checks = this.getValidatedChecks(checkList as CheckInput[], defaultSeverity);
 
     return {
       basePath,
@@ -79,7 +77,7 @@ class StandardLint {
     const validSeverityLevels = ['warn', 'error'];
 
     if (validSeverityLevels.includes(severity)) return severity;
-    return DEFAULT_SEVERITY_FALLBACK;
+    return this.defaultSeverityFallback;
   }
 
   /**
@@ -88,7 +86,7 @@ class StandardLint {
    * Provide `defaultSeverity` as it's not yet available in the class `config` object
    * when running the validation.
    */
-  private getValidatedChecks(checks: (string | Check)[], defaultSeverity: Severity): Check[] {
+  private getValidatedChecks(checks: (string | CheckInput)[], defaultSeverity: Severity): Check[] {
     const validCheckNames = [
       'all',
       'checkForConflictingLockfiles',
@@ -120,7 +118,7 @@ class StandardLint {
     }
 
     const validatedChecks: Check[] = checks
-      .map((check: Check | string) => {
+      .map((check: CheckInput | string) => {
         if (typeof check === 'string' && isValidCheckName(check))
           return <Check>{
             name: check,
@@ -128,9 +126,9 @@ class StandardLint {
           };
 
         if (typeof check === 'object' && isValidCheckName(check.name))
-          return {
+          return <Check>{
             name: check.name,
-            severity: this.getValidatedSeverityLevel(check.severity)
+            severity: this.getValidatedSeverityLevel(check.severity || defaultSeverity)
           };
 
         // No match, remove in filter step
@@ -139,9 +137,9 @@ class StandardLint {
           severity: defaultSeverity
         };
       })
-      .filter((check: Check) => check.name);
+      .filter((check: CheckInput) => check.name);
 
-    return validatedChecks;
+    return validatedChecks as Check[];
   }
 
   /**

@@ -19,7 +19,14 @@ export function checkForPresenceTests(
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const tests = getAllFiles(`${basePath}/${path}`, []);
+  const files = getAllFiles(`${basePath}/${path}`, []);
+  const tests = files.filter(
+    (file: string) =>
+      file.endsWith('test.ts') ||
+      file.endsWith('spec.ts') ||
+      file.endsWith('test.js') ||
+      file.endsWith('spec.js')
+  );
   const result = tests.length > 0;
 
   return {

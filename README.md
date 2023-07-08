@@ -15,7 +15,7 @@ StandardLint makes it convenient and easy to set up guardrails and guidelines fo
 
 The result of a run could look like this:
 
-```
+```text
 ✅ PASS: Diagrams
 ✅ PASS: Changelog
 🛎️ No custom path assigned to check "Diagrams" - Using default path "diagrams"...
@@ -152,6 +152,14 @@ Runs all checks.
 
 Checks if there are conflicting Node package lock files (i.e. both a Yarn lock file and an NPM lock file).
 
+### `checkForConsoleUsage`
+
+Checks if `console` is used, e.g. `console.log()` and similar. This is useful when you want to ensure a more comprehensive logging approach is used.
+
+Note that this uses a naive solution so even just a mention of console.log() (or similar) will fail this check.
+
+**Default**: `src`
+
 ### `checkForDefinedRelations`
 
 Checks if the service metadata defines system relations.
@@ -233,6 +241,12 @@ Checks if there is a template for GitHub issues.
 ### `checkForPresenceTemplatePullRequests`
 
 Checks if there is a template for GitHub Pull Requests.
+
+**Default**: `.github/ISSUE_TEMPLATE/pull_request.md`
+
+### `checkForPresenceTests`
+
+Checks if there are any tests in the provided location. This will match anything ending in `(test|spec).(ts|js)`.
 
 **Default**: `.github/ISSUE_TEMPLATE/pull_request.md`
 

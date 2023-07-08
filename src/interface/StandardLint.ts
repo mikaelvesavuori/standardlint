@@ -1,4 +1,4 @@
-import { Check, CheckResult, Severity } from './Check';
+import { Check, CheckInput, CheckResult, Severity } from './Check';
 
 /**
  * @description The `StandardLint` configuration.
@@ -24,7 +24,7 @@ export type Configuration = {
  */
 export type ConfigurationInput = {
   basePath?: string;
-  checks?: (string | Check)[];
+  checks?: (string | CheckInput)[];
   defaultSeverity?: Severity;
 };
 

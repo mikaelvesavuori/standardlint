@@ -1,10 +1,19 @@
 /**
+ * @description Check as input by the user.
+ */
+export type CheckInput = {
+  name: string;
+  severity?: Severity;
+  path?: string;
+};
+
+/**
  * @description The shape of a standalone Check.
  */
 export type Check = {
   name: string;
   severity: Severity;
-  path?: string;
+  path: string;
 };
 
 /**

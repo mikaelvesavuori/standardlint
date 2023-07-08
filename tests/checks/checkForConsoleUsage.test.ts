@@ -2,12 +2,24 @@ import test from 'ava';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
-test('It should pass when not finding any console usage', (t) => {
+test('It should pass when not finding any console usage when using base path', (t) => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
     basePath: 'tests',
     checks: ['checkForConsoleUsage']
+  });
+  const result = standardlint.check().results?.[0]?.status;
+
+  t.deepEqual(result, expected);
+});
+
+test('It should pass when not finding any console usage when using check-only path', (t) => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint({
+    basePath: 'tests',
+    checks: [{ name: 'checkForConsoleUsage', path: 'tests' }]
   });
   const result = standardlint.check().results?.[0]?.status;
 

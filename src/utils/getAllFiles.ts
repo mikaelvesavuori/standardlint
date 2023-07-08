@@ -15,5 +15,5 @@ export function getAllFiles(directoryPath: string, arrayOfFiles: string[]): stri
     else arrayOfFiles.push(path.join(process.cwd(), '/', filePath));
   });
 
-  return arrayOfFiles.filter((file) => file.endsWith('.ts'));
+  return arrayOfFiles.filter((file) => file);
 }
