@@ -2,7 +2,7 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
@@ -13,18 +13,18 @@ export function checkForPresenceCiConfig(
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const CONFIG_PATH = customPath || '.github/workflows/main.yml';
+  const path = customPath || '.github/workflows/main.yml';
   const name = 'CI configuration';
   const message = 'Check for CI configuration file';
 
-  if (!customPath) logDefaultPathMessage(name, CONFIG_PATH);
+  if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = checkIfFileOrDirectoryExists(basePath, CONFIG_PATH);
+  const result = exists(basePath, path);
 
   return {
     name,
     status: calculatePass(result, severity),
     message,
-    path: CONFIG_PATH
+    path
   };
 }

@@ -2,8 +2,8 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
-import { getDirectoryContents } from '../utils/getDirectoryContents';
+import { exists } from '../utils/exists';
+import { readDirectory } from '../utils/readDirectory';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
@@ -14,17 +14,17 @@ export function checkForPresenceDiagramsFolder(
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const DIAGRAMS_FOLDER = customPath || 'diagrams';
+  const path = customPath || 'diagrams';
   const name = 'Diagrams';
   const message = 'Check for diagrams folder with contents';
 
-  if (!customPath) logDefaultPathMessage(name, DIAGRAMS_FOLDER);
+  if (!customPath) logDefaultPathMessage(name, path);
 
   const result = (() => {
-    const diagramsPath = `${basePath}/${DIAGRAMS_FOLDER}`;
+    const diagramsPath = `${basePath}/${path}`;
 
-    if (checkIfFileOrDirectoryExists(diagramsPath)) {
-      const contents = getDirectoryContents(diagramsPath);
+    if (exists(diagramsPath)) {
+      const contents = readDirectory(diagramsPath);
       const diagramMatches = contents
         .map((fileName: string) => fileName.endsWith('.drawio'))
         .filter((match: boolean) => match);
@@ -38,6 +38,6 @@ export function checkForPresenceDiagramsFolder(
     name,
     status: calculatePass(result, severity),
     message,
-    path: DIAGRAMS_FOLDER
+    path
   };
 }

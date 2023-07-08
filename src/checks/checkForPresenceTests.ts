@@ -2,24 +2,25 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { exists } from '../utils/exists';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
+import { getAllFiles } from '../utils/getAllFiles';
 
 /**
- * @description Checks if there is a template for GitHub Pull Requests.
+ * @description Checks if there are tests.
  */
-export function checkForPresenceTemplatePullRequests(
+export function checkForPresenceTests(
   severity: Severity,
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const path = customPath || '.github/ISSUE_TEMPLATE/pull_request.md';
-  const name = 'PR template';
-  const message = 'Check for GitHub Pull Request template';
+  const path = customPath || 'tests';
+  const name = 'Tests';
+  const message = 'Check for presence of tests';
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = exists(basePath, path);
+  const tests = getAllFiles(`${basePath}/${path}`, []);
+  const result = tests.length > 0;
 
   return {
     name,

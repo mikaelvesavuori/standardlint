@@ -2,22 +2,22 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 
 /**
  * @description Checks if there is a `SECURITY.md` file.
  */
 export function checkForPresenceSecurity(severity: Severity, basePath: string): CheckResult {
-  const SECURITY_FILE_PATH = 'SECURITY.md';
+  const path = 'SECURITY.md';
   const name = 'Security information';
   const message = 'Check for SECURITY file';
 
-  const result = checkIfFileOrDirectoryExists(basePath, SECURITY_FILE_PATH);
+  const result = exists(basePath, path);
 
   return {
     name,
     status: calculatePass(result, severity),
     message,
-    path: SECURITY_FILE_PATH
+    path
   };
 }

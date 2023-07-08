@@ -4,6 +4,7 @@ import { Configuration, ConfigurationInput, Result } from '../interface/Standard
 import { getStatusCount } from '../application/getStatusCount';
 
 import { checkForConflictingLockfiles } from '../checks/checkForConflictingLockfiles';
+import { checkForConsoleUsage } from '../checks/checkForConsoleUsage';
 import { checkForDefinedRelations } from '../checks/checkForDefinedRelations';
 import { checkForDefinedServiceLevelObjectives } from '../checks/checkForDefinedServiceLevelObjectives';
 import { checkForDefinedTags } from '../checks/checkForDefinedTags';
@@ -20,8 +21,9 @@ import { checkForPresenceSecurity } from '../checks/checkForPresenceSecurity';
 import { checkForPresenceServiceMetadata } from '../checks/checkForPresenceServiceMetadata';
 import { checkForPresenceTemplateIssues } from '../checks/checkForPresenceTemplateIssues';
 import { checkForPresenceTemplatePullRequests } from '../checks/checkForPresenceTemplatePullRequests';
+import { checkForPresenceTests } from '../checks/checkForPresenceTests';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 
 import { MissingChecksError } from '../application/errors/errors';
 import { writeResultsToDisk } from '../utils/writeResultsToDisk';
@@ -52,7 +54,7 @@ class StandardLint {
    */
   private makeConfig(configInput?: ConfigurationInput): Configuration {
     const basePath =
-      configInput?.basePath && checkIfFileOrDirectoryExists(configInput.basePath)
+      configInput?.basePath && exists(configInput.basePath)
         ? configInput.basePath
         : DEFAULT_BASE_PATH_FALLBACK;
 
@@ -90,6 +92,7 @@ class StandardLint {
     const validCheckNames = [
       'all',
       'checkForConflictingLockfiles',
+      'checkForConsoleUsage',
       'checkForDefinedRelations',
       'checkForDefinedServiceLevelObjectives',
       'checkForDefinedTags',
@@ -105,7 +108,8 @@ class StandardLint {
       'checkForPresenceSecurity',
       'checkForPresenceServiceMetadata',
       'checkForPresenceTemplateIssues',
-      'checkForPresenceTemplatePullRequests'
+      'checkForPresenceTemplatePullRequests',
+      'checkForPresenceTests'
     ];
 
     const isValidCheckName = (name: string) => validCheckNames.includes(name);
@@ -169,6 +173,7 @@ class StandardLint {
     const checksList: any = {
       checkForConflictingLockfiles: () =>
         checkForConflictingLockfiles(severity, this.config.basePath),
+      checkForConsoleUsage: () => checkForConsoleUsage(severity, this.config.basePath, path),
       checkForDefinedRelations: () =>
         checkForDefinedRelations(severity, this.config.basePath, path),
       checkForDefinedServiceLevelObjectives: () =>
@@ -194,7 +199,8 @@ class StandardLint {
       checkForPresenceTemplateIssues: () =>
         checkForPresenceTemplateIssues(severity, this.config.basePath, path),
       checkForPresenceTemplatePullRequests: () =>
-        checkForPresenceTemplatePullRequests(severity, this.config.basePath, path)
+        checkForPresenceTemplatePullRequests(severity, this.config.basePath, path),
+      checkForPresenceTests: () => checkForPresenceTests(severity, this.config.basePath, path)
     };
 
     const result = checksList[name]();

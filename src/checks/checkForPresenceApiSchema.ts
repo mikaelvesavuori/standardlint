@@ -2,7 +2,7 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
@@ -13,18 +13,18 @@ export function checkForPresenceApiSchema(
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const API_SCHEMA_PATH = customPath || 'api/schema.json';
+  const path = customPath || 'api/schema.json';
   const name = 'API schema';
   const message = 'Check for API schema';
 
-  if (!customPath) logDefaultPathMessage(name, API_SCHEMA_PATH);
+  if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = checkIfFileOrDirectoryExists(basePath, API_SCHEMA_PATH);
+  const result = exists(basePath, path);
 
   return {
     name,
     status: calculatePass(result, severity),
     message,
-    path: API_SCHEMA_PATH
+    path
   };
 }

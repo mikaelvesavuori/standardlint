@@ -2,22 +2,22 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 
 /**
  * @description Checks if there is a `CODEOWNERS` file.
  */
 export function checkForPresenceCodeowners(severity: Severity, basePath: string): CheckResult {
-  const CODEOWNERS_FILE_PATH = 'CODEOWNERS';
+  const path = 'CODEOWNERS';
   const name = 'Code owners';
   const message = 'Check for CODEOWNERS file';
 
-  const result = checkIfFileOrDirectoryExists(basePath, CODEOWNERS_FILE_PATH);
+  const result = exists(basePath, path);
 
   return {
     name,
     status: calculatePass(result, severity),
     message,
-    path: CODEOWNERS_FILE_PATH
+    path
   };
 }

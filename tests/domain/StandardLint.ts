@@ -142,6 +142,10 @@ test('It should use all checks if provided the "all" check option', (t) => {
       severity: 'error'
     },
     {
+      name: 'checkForConsoleUsage',
+      severity: 'error'
+    },
+    {
       name: 'checkForDefinedRelations',
       severity: 'error'
     },
@@ -203,6 +207,10 @@ test('It should use all checks if provided the "all" check option', (t) => {
     },
     {
       name: 'checkForPresenceTemplatePullRequests',
+      severity: 'error'
+    },
+    {
+      name: 'checkForPresenceTests',
       severity: 'error'
     }
   ];

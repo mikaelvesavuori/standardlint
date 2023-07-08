@@ -2,22 +2,22 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 
 /**
  * @description Checks if there is a `CONTRIBUTING.md` file.
  */
 export function checkForPresenceContributing(severity: Severity, basePath: string): CheckResult {
-  const CONTRIBUTING_FILE_PATH = 'CONTRIBUTING.md';
+  const path = 'CONTRIBUTING.md';
   const name = 'Contribution information';
   const message = 'Check for CONTRIBUTING file';
 
-  const result = checkIfFileOrDirectoryExists(basePath, CONTRIBUTING_FILE_PATH);
+  const result = exists(basePath, path);
 
   return {
     name,
     status: calculatePass(result, severity),
     message,
-    path: CONTRIBUTING_FILE_PATH
+    path
   };
 }

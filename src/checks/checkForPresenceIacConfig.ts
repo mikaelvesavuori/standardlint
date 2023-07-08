@@ -2,7 +2,7 @@ import { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { checkIfFileOrDirectoryExists } from '../utils/checkIfFileOrDirectoryExists';
+import { exists } from '../utils/exists';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
@@ -13,18 +13,18 @@ export function checkForPresenceIacConfig(
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const IAC_CONFIG_PATH = customPath || 'serverless.yml';
+  const path = customPath || 'serverless.yml';
   const name = 'IAC configuration';
   const message = 'Check for Infrastructure-as-Code configuration';
 
-  if (!customPath) logDefaultPathMessage(name, IAC_CONFIG_PATH);
+  if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = checkIfFileOrDirectoryExists(basePath, IAC_CONFIG_PATH);
+  const result = exists(basePath, path);
 
   return {
     name,
     status: calculatePass(result, severity),
     message,
-    path: basePath
+    path
   };
 }

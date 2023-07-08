@@ -13,16 +13,13 @@ export function checkForDefinedRelations(
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const SERVICE_METADATA_FILE_PATH = customPath || 'manifest.json';
+  const path = customPath || 'manifest.json';
   const name = 'Relations';
   const message = 'Check for defined relations';
 
-  if (!customPath) logDefaultPathMessage(name, SERVICE_METADATA_FILE_PATH);
+  if (!customPath) logDefaultPathMessage(name, path);
 
-  const serviceMetadata: Record<string, any> = getJSONFileContents(
-    basePath,
-    SERVICE_METADATA_FILE_PATH
-  );
+  const serviceMetadata: Record<string, any> = getJSONFileContents(basePath, path);
 
   const result =
     serviceMetadata && serviceMetadata?.relations && serviceMetadata?.relations.length > 0;
@@ -31,6 +28,6 @@ export function checkForDefinedRelations(
     name,
     status: calculatePass(result, severity),
     message,
-    path: SERVICE_METADATA_FILE_PATH
+    path
   };
 }

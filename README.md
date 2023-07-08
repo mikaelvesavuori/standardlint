@@ -242,18 +242,12 @@ Checks if there is a template for GitHub Pull Requests.
 
 Checks:
 
-- Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
-- Did you update docs (Markdown)?
-- Did you update API schema (YAML/JSON)?
-- More ArchUnit/fitness functions kind of support?
-- Ensure console.log() is not used
-- Ensure imports following acceptable conventions
-- No cyclic methods/dependencies
-- Ensure there are tests
-- Documentation coverage
-- Ensure methods/functions are below a certain threshold in terms of lines of code
-- Support for external config
-
-Tech:
-
-- CLI?
+- Do:
+  - Documentation coverage
+  - Ensure imports follow acceptable conventions
+  - No cyclic methods/dependencies
+  - Ensure methods/functions are below a certain threshold in terms of lines of code
+  - Check for throwing native errors
+- Do later:
+  - Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
+  - Support for external config

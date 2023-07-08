@@ -2,7 +2,7 @@
 
 import { createNewStandardLint } from './domain/StandardLint';
 
-import { checkIfFileOrDirectoryExists } from './utils/checkIfFileOrDirectoryExists';
+import { exists } from './utils/exists';
 import { getJSONFileContents } from './utils/getJSONFileContents';
 import { writeResultsToDisk } from './utils/writeResultsToDisk';
 
@@ -16,7 +16,7 @@ function main() {
   try {
     console.log('Running StandardLint...');
 
-    const config = checkIfFileOrDirectoryExists('standardlint.json')
+    const config = exists('standardlint.json')
       ? getJSONFileContents(process.cwd(), 'standardlint.json')
       : {};
 

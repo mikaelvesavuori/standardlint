@@ -13,16 +13,13 @@ export function checkForDefinedServiceLevelObjectives(
   basePath: string,
   customPath?: string
 ): CheckResult {
-  const SERVICE_METADATA_FILE_PATH = customPath || 'manifest.json';
+  const path = customPath || 'manifest.json';
   const name = 'SLOs';
   const message = 'Check for defined Service Level Objectives';
 
-  if (!customPath) logDefaultPathMessage(name, SERVICE_METADATA_FILE_PATH);
+  if (!customPath) logDefaultPathMessage(name, path);
 
-  const serviceMetadata: Record<string, any> = getJSONFileContents(
-    basePath,
-    SERVICE_METADATA_FILE_PATH
-  );
+  const serviceMetadata: Record<string, any> = getJSONFileContents(basePath, path);
 
   const result = serviceMetadata && serviceMetadata?.slo && serviceMetadata?.slo.length > 0;
 
@@ -30,6 +27,6 @@ export function checkForDefinedServiceLevelObjectives(
     name,
     status: calculatePass(result, severity),
     message,
-    path: SERVICE_METADATA_FILE_PATH
+    path
   };
 }

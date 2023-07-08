@@ -1,6 +1,7 @@
 # Files
 .env
 .dccache
+.DS_Store
 standardlint.json
 standardlint.results.json
 
