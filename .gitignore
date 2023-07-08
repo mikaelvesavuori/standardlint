@@ -8,6 +8,7 @@ standardlint.results.json
 # Folders
 node_modules/
 lib/
+dist/
 docs/
 coverage/
 jest-coverage/
