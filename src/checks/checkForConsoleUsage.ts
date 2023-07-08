@@ -23,7 +23,8 @@ export function checkForConsoleUsage(
   if (!customPath) logDefaultPathMessage(name, path);
 
   const files = getAllFiles(`${basePath}/${path}`, []);
-  const filteredFiles = ignorePaths ? filterFiles(files, ignorePaths) : files;
+  const filteredFiles =
+    ignorePaths && ignorePaths.length > 0 ? filterFiles(files, ignorePaths) : files;
 
   const regex = /console.(.*)/gi;
   const includesConsole = filteredFiles.map((test: string) => regex.test(readFile(test)));

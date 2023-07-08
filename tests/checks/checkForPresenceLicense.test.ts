@@ -14,6 +14,10 @@ test('It should pass when finding a LICENSE file', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a LICENSE file', (t) => {
   const expected = 'warn';
 

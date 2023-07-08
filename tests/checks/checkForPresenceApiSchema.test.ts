@@ -14,6 +14,10 @@ test('It should pass when finding an API schema', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing an API schema', (t) => {
   const expected = 'warn';
 

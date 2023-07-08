@@ -14,6 +14,10 @@ test('It should pass when finding a service metadata file', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a service metadata file', (t) => {
   const expected = 'warn';
 

@@ -2,7 +2,7 @@ import test from 'ava';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
-test('It should pass when not finding any console usage when using base path', (t) => {
+test('It should pass when not finding any console usage while using base path', (t) => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
@@ -14,7 +14,7 @@ test('It should pass when not finding any console usage when using base path', (
   t.deepEqual(result, expected);
 });
 
-test('It should pass when not finding any console usage when using check-only path', (t) => {
+test('It should pass when not finding any console usage while using check-only path', (t) => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
@@ -26,13 +26,12 @@ test('It should pass when not finding any console usage when using check-only pa
   t.deepEqual(result, expected);
 });
 
-test('It should pass and accept ignore paths', (t) => {
+test('It should pass when not finding any console usage while using ignore paths', (t) => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
-    basePath: 'testdata',
     ignorePaths: ['/src/'],
-    checks: [{ name: 'checkForConsoleUsage' }]
+    checks: ['checkForConsoleUsage']
   });
   const result = standardlint.check().results?.[0]?.status;
 
@@ -43,36 +42,48 @@ test('It should pass and accept ignore paths', (t) => {
  * NEGATIVE TESTS
  */
 
-test('It should fail when finding console.log()', (t) => {
-  const expected = 'fail';
+test('It should warn when finding console.log()', (t) => {
+  const expected = 'warn';
 
   const standardlint = createNewStandardLint({
     basePath: 'testdata',
-    checks: ['checkForConsoleUsage']
+    checks: [{ name: 'checkForConsoleUsage', severity: 'warn' }]
   });
   const result = standardlint.check().results?.[0]?.status;
 
   t.deepEqual(result, expected);
 });
 
-test('It should fail when finding console.warn()', (t) => {
+test('It should error when finding console.log()', (t) => {
   const expected = 'fail';
 
   const standardlint = createNewStandardLint({
     basePath: 'testdata',
-    checks: ['checkForConsoleUsage']
+    checks: [{ name: 'checkForConsoleUsage', severity: 'error' }]
   });
   const result = standardlint.check().results?.[0]?.status;
 
   t.deepEqual(result, expected);
 });
 
-test('It should fail when finding console.error()', (t) => {
+test('It should error when finding console.warn()', (t) => {
   const expected = 'fail';
 
   const standardlint = createNewStandardLint({
     basePath: 'testdata',
-    checks: ['checkForConsoleUsage']
+    checks: [{ name: 'checkForConsoleUsage', severity: 'error' }]
+  });
+  const result = standardlint.check().results?.[0]?.status;
+
+  t.deepEqual(result, expected);
+});
+
+test('It should error when finding console.error()', (t) => {
+  const expected = 'fail';
+
+  const standardlint = createNewStandardLint({
+    basePath: 'testdata',
+    checks: [{ name: 'checkForConsoleUsage', severity: 'error' }]
   });
   const result = standardlint.check().results?.[0]?.status;
 

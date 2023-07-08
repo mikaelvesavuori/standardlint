@@ -14,6 +14,10 @@ test('It should pass when finding at least one defined relation', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when finding no defined relations', (t) => {
   const expected = 'warn';
 

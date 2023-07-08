@@ -113,6 +113,43 @@ test('It should remove checks with unknown names', (t) => {
   t.deepEqual(result, expected);
 });
 
+test('It should remove ignore paths that are not strings', (t) => {
+  const expected = [
+    {
+      ignorePaths: ['abc'],
+      name: 'checkForPresenceContributing',
+      severity: 'error'
+    }
+  ];
+
+  const standardlint = createNewStandardLint({
+    // @ts-ignore
+    ignorePaths: ['abc', 123],
+    checks: ['checkForPresenceContributing']
+  });
+  const result = standardlint.config.checks;
+
+  t.deepEqual(result, expected);
+});
+
+test('It should return an empty array for zero-length ignore paths', (t) => {
+  const expected = [
+    {
+      ignorePaths: [],
+      name: 'checkForPresenceContributing',
+      severity: 'error'
+    }
+  ];
+
+  const standardlint = createNewStandardLint({
+    ignorePaths: [],
+    checks: ['checkForPresenceContributing']
+  });
+  const result = standardlint.config.checks;
+
+  t.deepEqual(result, expected);
+});
+
 test('It should validate a mixed set of string and object-defined checks', (t) => {
   const expected = [
     {

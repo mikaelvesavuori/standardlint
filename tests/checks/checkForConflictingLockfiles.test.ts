@@ -14,6 +14,10 @@ test('It should pass when there are no conflicting lock files', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when there are conflicting lock files', (t) => {
   const expected = 'warn';
 

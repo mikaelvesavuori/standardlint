@@ -14,6 +14,10 @@ test('It should pass when finding a GitHub issue template', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a GitHub issue template', (t) => {
   const expected = 'warn';
 

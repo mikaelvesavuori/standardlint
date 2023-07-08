@@ -14,6 +14,10 @@ test('It should pass when finding an Infrastructure-as-Code configuration', (t) 
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing an Infrastructure-as-Code configuration', (t) => {
   const expected = 'warn';
 

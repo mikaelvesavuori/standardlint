@@ -14,6 +14,10 @@ test('It should pass when finding at least one defined Service Level Objective',
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when finding no defined Service Level Objectives', (t) => {
   const expected = 'warn';
 

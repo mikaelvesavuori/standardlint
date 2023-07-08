@@ -14,6 +14,10 @@ test('It should pass when finding a CONTRIBUTING file', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a CONTRIBUTING file', (t) => {
   const expected = 'warn';
 

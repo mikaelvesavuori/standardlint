@@ -14,6 +14,10 @@ test('It should pass when finding a folder with solution diagrams', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a folder with solution diagrams', (t) => {
   const expected = 'warn';
 
@@ -38,7 +42,7 @@ test('It should error when missing a folder with solution diagrams', (t) => {
   t.deepEqual(result, expected);
 });
 
-test('It should fail when using a non-existent directory', (t) => {
+test('It should error when using a non-existent directory', (t) => {
   const expected = 'fail';
 
   const standardlint = createNewStandardLint({

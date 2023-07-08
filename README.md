@@ -64,6 +64,7 @@ The format is:
 | Key               | Required | Default         | Example                       | Description                                                             |
 | ----------------- | -------- | --------------- | ----------------------------- | ----------------------------------------------------------------------- |
 | `basePath`        | No       | `.`             | `./project_dir/`              | Sets the base path for any file lookups.                                |
+| `ignorePaths`        | No       | `[]`             | `["/tests/", "/src/problematic-file.ts"]`              | Paths that will be ignored for some checks. Does not support globbing.                                |
 | `checks`          | Yes      | -               | `["checkForPresenceLicense"]` | A list of checks to run, either using string or object form.            |
 | `defaultSeverity` | No       | `error`         | `warn`                        | Sets the default severity level for any issues.                         |
 | `path`            | No       | Multiple values | `api/schema.yml`              | Sets the exact path to a resource. Only used optionally by some checks. |
@@ -73,6 +74,16 @@ The format is:
 If you for some reason keep your project files "lower" than in the root where you want to do file lookups, you can add this optional argument.
 
 _It's recommended you do not change this unless you know what you are doing._
+
+#### Ignore paths
+
+This provides the possibility to ignore certain paths.
+
+These paths will be respected and discarded by the following checks:
+
+- `checkForConsoleUsage`
+- `checkForPresenceTests`
+- `checkForThrowingPlainErrors`
 
 #### Checks
 
@@ -157,6 +168,8 @@ Checks if there are conflicting Node package lock files (i.e. both a Yarn lock f
 Checks if `console` is used, e.g. `console.log()` and similar. This is useful when you want to ensure a more comprehensive logging approach is used.
 
 Note that this uses a naive solution so even just a mention of console.log() (or similar) will fail this check.
+
+**Will respect `ignorePaths` options.**
 
 **Default**: `src`
 
@@ -250,18 +263,24 @@ Checks if there are any tests in the provided location. This will match anything
 
 **Default**: `.github/ISSUE_TEMPLATE/pull_request.md`
 
+**Will respect `ignorePaths` options.**
+
+### `checkForThrowingPlainErrors`
+
+Checks if any file uses `throw Error` or `throw new Error`. This is meant to push toward the use of actual loggers, rather than plain console output.
+
+**Will respect `ignorePaths` options.**
+
 ---
 
 ## Ideas for improvements
 
 Checks:
 
-- Do:
-  - Check for throwing native errors
-  - Ensure methods/functions are below a certain threshold in terms of lines of code
-  - Documentation coverage
-  - Ensure imports follow acceptable conventions
-  - No cyclic methods/dependencies
-- Do later:
+- Ensure methods/functions are below a certain threshold in terms of lines of code
+- Documentation coverage
+- Ensure imports follow certain conventions
+- No cyclic methods/dependencies
+- Maybe:
   - Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
   - Support for external config

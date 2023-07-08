@@ -14,6 +14,10 @@ test('It should pass when finding at least one defined tag', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when finding no defined tags', (t) => {
   const expected = 'warn';
 

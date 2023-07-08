@@ -14,6 +14,10 @@ test('It should pass when finding a CHANGELOG file', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a CHANGELOG file', (t) => {
   const expected = 'warn';
 

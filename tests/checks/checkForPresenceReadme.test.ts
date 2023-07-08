@@ -14,6 +14,10 @@ test('It should pass when finding a README file', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a README file', (t) => {
   const expected = 'warn';
 

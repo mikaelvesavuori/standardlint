@@ -14,6 +14,10 @@ test('It should pass when finding a GitHub Pull Request template', (t) => {
   t.deepEqual(result, expected);
 });
 
+/**
+ * NEGATIVE TESTS
+ */
+
 test('It should warn when missing a GitHub Pull Request template', (t) => {
   const expected = 'warn';
 

@@ -24,3 +24,43 @@ test('It should pass when finding a test using the check-only path', (t) => {
 
   t.deepEqual(result, expected);
 });
+
+test('It should pass when finding a test while using ignore paths', (t) => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint({
+    ignorePaths: ['/src/'],
+    checks: ['checkForPresenceTests']
+  });
+  const result = standardlint.check().results?.[0]?.status;
+
+  t.deepEqual(result, expected);
+});
+
+/**
+ * NEGATIVE TESTS
+ */
+
+test('It should warn when not finding a test', (t) => {
+  const expected = 'warn';
+
+  const standardlint = createNewStandardLint({
+    basePath: 'testdata/diagrams',
+    checks: [{ name: 'checkForPresenceTests', severity: 'warn' }]
+  });
+  const result = standardlint.check().results?.[0]?.status;
+
+  t.deepEqual(result, expected);
+});
+
+test('It should error when not finding a test', (t) => {
+  const expected = 'fail';
+
+  const standardlint = createNewStandardLint({
+    basePath: 'testdata/diagrams',
+    checks: [{ name: 'checkForPresenceTests', severity: 'error' }]
+  });
+  const result = standardlint.check().results?.[0]?.status;
+
+  t.deepEqual(result, expected);
+});
