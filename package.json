@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [

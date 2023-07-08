@@ -1,4 +1,4 @@
-import { CheckResult, Check, Severity, CheckInput } from '../interface/Check';
+import { CheckResult, Check, Severity, CheckInput, IgnorePath } from '../interface/Check';
 import { Configuration, ConfigurationInput, Result } from '../interface/StandardLint';
 
 import { getStatusCount } from '../application/getStatusCount';
@@ -22,6 +22,7 @@ import { checkForPresenceServiceMetadata } from '../checks/checkForPresenceServi
 import { checkForPresenceTemplateIssues } from '../checks/checkForPresenceTemplateIssues';
 import { checkForPresenceTemplatePullRequests } from '../checks/checkForPresenceTemplatePullRequests';
 import { checkForPresenceTests } from '../checks/checkForPresenceTests';
+import { checkForThrowingPlainErrors } from '../checks/checkForThrowingPlainErrors';
 
 import { exists } from '../utils/exists';
 
@@ -41,6 +42,7 @@ export function createNewStandardLint(config?: ConfigurationInput) {
 class StandardLint {
   private readonly defaultBasePathFallback = '.';
   private readonly defaultSeverityFallback = 'error';
+  private readonly defaultIgnorePathsFallback = [];
   readonly config: Configuration;
 
   constructor(config?: ConfigurationInput) {
@@ -60,8 +62,12 @@ class StandardLint {
       ? this.getValidatedSeverityLevel(configInput.defaultSeverity)
       : this.defaultSeverityFallback;
 
+    const ignorePaths = configInput?.ignorePaths
+      ? this.getSanitizedPaths(configInput.ignorePaths)
+      : this.defaultIgnorePathsFallback;
+
     const checkList = Array.isArray(configInput?.checks) ? configInput?.checks : [];
-    const checks = this.getValidatedChecks(checkList as CheckInput[], defaultSeverity);
+    const checks = this.getValidatedChecks(checkList as CheckInput[], defaultSeverity, ignorePaths);
 
     return {
       basePath,
@@ -81,12 +87,24 @@ class StandardLint {
   }
 
   /**
+   * @description Sanitizes provided paths or return empty array if none is provided.
+   */
+  private getSanitizedPaths(ignorePaths: IgnorePath[]) {
+    if (ignorePaths.length === 0) return [];
+    return ignorePaths.filter((path: string) => typeof path === 'string');
+  }
+
+  /**
    * @description Validates and sanitizes a requested list of checks.
    *
    * Provide `defaultSeverity` as it's not yet available in the class `config` object
    * when running the validation.
    */
-  private getValidatedChecks(checks: (string | CheckInput)[], defaultSeverity: Severity): Check[] {
+  private getValidatedChecks(
+    checks: (string | CheckInput)[],
+    defaultSeverity: Severity,
+    ignorePaths: IgnorePath[]
+  ): Check[] {
     const validCheckNames = [
       'all',
       'checkForConflictingLockfiles',
@@ -107,7 +125,8 @@ class StandardLint {
       'checkForPresenceServiceMetadata',
       'checkForPresenceTemplateIssues',
       'checkForPresenceTemplatePullRequests',
-      'checkForPresenceTests'
+      'checkForPresenceTests',
+      'checkForThrowingPlainErrors'
     ];
 
     const isValidCheckName = (name: string) => validCheckNames.includes(name);
@@ -122,19 +141,21 @@ class StandardLint {
         if (typeof check === 'string' && isValidCheckName(check))
           return <Check>{
             name: check,
-            severity: defaultSeverity
+            severity: defaultSeverity,
+            ignorePaths
           };
 
         if (typeof check === 'object' && isValidCheckName(check.name))
           return <Check>{
             name: check.name,
-            severity: this.getValidatedSeverityLevel(check.severity || defaultSeverity)
+            path: check.path || '',
+            severity: this.getValidatedSeverityLevel(check.severity || defaultSeverity),
+            ignorePaths
           };
 
         // No match, remove in filter step
         return <Check>{
-          name: '',
-          severity: defaultSeverity
+          name: ''
         };
       })
       .filter((check: CheckInput) => check.name);
@@ -166,12 +187,13 @@ class StandardLint {
    * @description Run test on an individual Check.
    */
   private test(check: Check): CheckResult {
-    const { name, severity, path } = check;
+    const { name, severity, path, ignorePaths } = check;
 
     const checksList: any = {
       checkForConflictingLockfiles: () =>
         checkForConflictingLockfiles(severity, this.config.basePath),
-      checkForConsoleUsage: () => checkForConsoleUsage(severity, this.config.basePath, path),
+      checkForConsoleUsage: () =>
+        checkForConsoleUsage(severity, this.config.basePath, path, ignorePaths),
       checkForDefinedRelations: () =>
         checkForDefinedRelations(severity, this.config.basePath, path),
       checkForDefinedServiceLevelObjectives: () =>
@@ -198,7 +220,10 @@ class StandardLint {
         checkForPresenceTemplateIssues(severity, this.config.basePath, path),
       checkForPresenceTemplatePullRequests: () =>
         checkForPresenceTemplatePullRequests(severity, this.config.basePath, path),
-      checkForPresenceTests: () => checkForPresenceTests(severity, this.config.basePath, path)
+      checkForPresenceTests: () =>
+        checkForPresenceTests(severity, this.config.basePath, path, ignorePaths),
+      checkForThrowingPlainErrors: () =>
+        checkForThrowingPlainErrors(severity, this.config.basePath, path, ignorePaths)
     };
 
     const result = checksList[name]();

@@ -5,6 +5,7 @@ export type CheckInput = {
   name: string;
   severity?: Severity;
   path?: string;
+  ignorePaths?: IgnorePath[];
 };
 
 /**
@@ -14,6 +15,7 @@ export type Check = {
   name: string;
   severity: Severity;
   path: string;
+  ignorePaths: IgnorePath[];
 };
 
 /**
@@ -35,3 +37,8 @@ export type Status = 'pass' | 'warn' | 'fail';
  * @description Represents how severe a non-passing state is.
  */
 export type Severity = 'error' | 'warn';
+
+/**
+ * @description A path that will be ignored during certain checks.
+ */
+export type IgnorePath = string;

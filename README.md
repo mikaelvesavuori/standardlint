@@ -257,11 +257,11 @@ Checks if there are any tests in the provided location. This will match anything
 Checks:
 
 - Do:
+  - Check for throwing native errors
+  - Ensure methods/functions are below a certain threshold in terms of lines of code
   - Documentation coverage
   - Ensure imports follow acceptable conventions
   - No cyclic methods/dependencies
-  - Ensure methods/functions are below a certain threshold in terms of lines of code
-  - Check for throwing native errors
 - Do later:
   - Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
   - Support for external config

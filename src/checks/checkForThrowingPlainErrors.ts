@@ -8,26 +8,27 @@ import { readFile } from '../utils/readFile';
 import { filterFiles } from '../utils/filterFiles';
 
 /**
- * @description Checks if there is an API schema.
+ * @description Checks if plain (non-custom) errors are thrown.
  */
-export function checkForConsoleUsage(
+export function checkForThrowingPlainErrors(
   severity: Severity,
   basePath: string,
   customPath?: string,
   ignorePaths?: string[]
 ): CheckResult {
   const path = customPath || 'src';
-  const name = 'Console usage';
-  const message = 'Check for console usage';
+  const name = 'Error handling';
+  const message = 'Check for presence of plain (non-custom) errors';
 
   if (!customPath) logDefaultPathMessage(name, path);
 
   const files = getAllFiles(`${basePath}/${path}`, []);
   const filteredFiles = ignorePaths ? filterFiles(files, ignorePaths) : files;
 
-  const regex = /console.(.*)/gi;
-  const includesConsole = filteredFiles.map((test: string) => regex.test(readFile(test)));
-  const result = !includesConsole.includes(true); // We don't want any occurrences
+  const regex = /(throw Error|throw new Error)(.*)/gi;
+  const includesError = filteredFiles.map((test: string) => regex.test(readFile(test)));
+
+  const result = !includesError.includes(true);
 
   return {
     name,

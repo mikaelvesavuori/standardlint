@@ -4,6 +4,7 @@ import { calculatePass } from '../application/calculatePass';
 
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 import { getAllFiles } from '../utils/getAllFiles';
+import { filterFiles } from '../utils/filterFiles';
 
 /**
  * @description Checks if there are tests.
@@ -11,7 +12,8 @@ import { getAllFiles } from '../utils/getAllFiles';
 export function checkForPresenceTests(
   severity: Severity,
   basePath: string,
-  customPath?: string
+  customPath?: string,
+  ignorePaths?: string[]
 ): CheckResult {
   const path = customPath || 'tests';
   const name = 'Tests';
@@ -20,7 +22,9 @@ export function checkForPresenceTests(
   if (!customPath) logDefaultPathMessage(name, path);
 
   const files = getAllFiles(`${basePath}/${path}`, []);
-  const tests = files.filter(
+  const filteredFiles = ignorePaths ? filterFiles(files, ignorePaths) : files;
+
+  const tests = filteredFiles.filter(
     (file: string) =>
       file.endsWith('test.ts') ||
       file.endsWith('spec.ts') ||

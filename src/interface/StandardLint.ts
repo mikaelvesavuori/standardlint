@@ -1,4 +1,4 @@
-import { Check, CheckInput, CheckResult, Severity } from './Check';
+import { Check, CheckInput, CheckResult, IgnorePath, Severity } from './Check';
 
 /**
  * @description The `StandardLint` configuration.
@@ -17,6 +17,10 @@ export type Configuration = {
    * default fallback level.
    */
   defaultSeverity: Severity;
+  /**
+   * @description For some checks, the user can choose to ignore files on these paths.
+   */
+  ignorePaths: IgnorePath[];
 };
 
 /**
@@ -26,6 +30,7 @@ export type ConfigurationInput = {
   basePath?: string;
   checks?: (string | CheckInput)[];
   defaultSeverity?: Severity;
+  ignorePaths?: IgnorePath[];
 };
 
 /**
