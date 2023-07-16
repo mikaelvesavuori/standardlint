@@ -37,6 +37,10 @@ The result of a run could look like this:
 ✅ PASS: Service metadata
 ```
 
+### Relation to projects like ESLint
+
+The majority of StandardLint checks are meant to assess the overall architecture, for example presence of certain files or documentation. While StandardLint has a few checks that inspect code (throwing errors and using `console`), the majority of such use cases are better handled with something like [ESLint](https://eslint.org).
+
 ## StandardLint GitHub Action
 
 There's a ready-to-use [StandardLint GitHub Action](https://github.com/marketplace/actions/standardlint-action) in the Marketplace if you really want the minimum hassle. Plus, you get a great visual overview of your checks!
@@ -275,12 +279,5 @@ Checks if any file uses `throw Error` or `throw new Error`. This is meant to pus
 
 ## Ideas for improvements
 
-Checks:
-
-- Ensure methods/functions are below a certain threshold in terms of lines of code
-- Documentation coverage
-- Ensure imports follow certain conventions
-- No cyclic methods/dependencies
-- Maybe:
-  - Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
-  - Support for external config
+- Service metadata: Do you link to observability resources (logs/metrics/traces/dashboards etc.)?
+- Support for external config
