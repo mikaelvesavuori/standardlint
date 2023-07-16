@@ -265,7 +265,7 @@ Checks if there is a template for GitHub Pull Requests.
 
 Checks if there are any tests in the provided location. This will match anything ending in `(test|spec).(ts|js)`.
 
-**Default**: `.github/ISSUE_TEMPLATE/pull_request.md`
+**Default**: `tests`
 
 **Will respect `ignorePaths` options.**
 
