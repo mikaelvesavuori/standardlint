@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -38,7 +38,8 @@
     "test": "npm run test:licenses && npm run test:types && npm run test:unit",
     "test:types": "npx type-coverage --at-least 97 --strict --ignore-files \"tests/**/*.ts\" --ignore-files \"*.ts\" --ignore-files \"src/application/errors/*.ts\" --ignore-files \"testdata/*.ts\"",
     "test:licenses": "npx license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
-    "test:unit": "npx c8 -reporter=lcov ava",
+    "test:unit": "npx vitest run --coverage",
+    "test:watch": "npx vitest --watch",
     "build": "npm run clean && npm run build:ncc",
     "build:ncc": "npx ncc build src/index.ts --license licenses.txt",
     "clean": "rm -rf dist && mkdir -p dist",
@@ -47,36 +48,21 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@ava/typescript": "4",
     "@types/node": "latest",
-    "@typescript-eslint/eslint-plugin": "5",
-    "@typescript-eslint/parser": "5",
+    "@typescript-eslint/eslint-plugin": "8",
+    "@typescript-eslint/parser": "8",
     "@vercel/ncc": "0",
-    "ava": "5",
-    "c8": "8",
+    "@vitest/coverage-v8": "2",
     "eslint": "8",
-    "eslint-config-prettier": "8",
-    "eslint-plugin-prettier": "4",
-    "husky": "8",
+    "eslint-config-prettier": "9",
+    "eslint-plugin-prettier": "5",
+    "husky": "9",
     "license-compliance": "latest",
-    "prettier": "2",
+    "prettier": "3",
     "ts-node": "latest",
     "tslib": "latest",
     "type-coverage": "2",
-    "typescript": "5"
-  },
-  "ava": {
-    "typescript": {
-      "rewritePaths": {
-        "src/": "dist/"
-      },
-      "compile": false
-    },
-    "files": [
-      "tests/**/*.ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
+    "typescript": "5",
+    "vitest": "2"
   }
 }

@@ -1,8 +1,8 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
-test('It should pass when finding a test using the base path', (t) => {
+test('It should pass when finding a test using the base path', () => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
@@ -10,10 +10,10 @@ test('It should pass when finding a test using the base path', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
 
-test('It should pass when finding a test using the check-only path', (t) => {
+test('It should pass when finding a test using the check-only path', () => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
@@ -22,10 +22,10 @@ test('It should pass when finding a test using the check-only path', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
 
-test('It should pass when finding a test while using ignore paths', (t) => {
+test('It should pass when finding a test while using ignore paths', () => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
@@ -34,14 +34,14 @@ test('It should pass when finding a test while using ignore paths', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
 
 /**
  * NEGATIVE TESTS
  */
 
-test('It should warn when not finding a test', (t) => {
+test('It should warn when not finding a test', () => {
   const expected = 'warn';
 
   const standardlint = createNewStandardLint({
@@ -50,10 +50,10 @@ test('It should warn when not finding a test', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
 
-test('It should error when not finding a test', (t) => {
+test('It should error when not finding a test', () => {
   const expected = 'fail';
 
   const standardlint = createNewStandardLint({
@@ -62,5 +62,5 @@ test('It should error when not finding a test', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });

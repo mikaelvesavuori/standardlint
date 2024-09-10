@@ -1,8 +1,8 @@
-import test from 'ava';
+import { test, expect } from 'vitest';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
-test('It should pass when there are no conflicting lock files', (t) => {
+test('It should pass when there are no conflicting lock files', () => {
   const expected = 'pass';
 
   const standardlint = createNewStandardLint({
@@ -11,14 +11,14 @@ test('It should pass when there are no conflicting lock files', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
 
 /**
  * NEGATIVE TESTS
  */
 
-test('It should warn when there are conflicting lock files', (t) => {
+test('It should warn when there are conflicting lock files', () => {
   const expected = 'warn';
 
   const standardlint = createNewStandardLint({
@@ -27,10 +27,10 @@ test('It should warn when there are conflicting lock files', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
 
-test('It should error when there are conflicting lock files', (t) => {
+test('It should error when there are conflicting lock files', () => {
   const expected = 'fail';
 
   const standardlint = createNewStandardLint({
@@ -39,5 +39,5 @@ test('It should error when there are conflicting lock files', (t) => {
   });
   const result = standardlint.check().results?.[0]?.status;
 
-  t.deepEqual(result, expected);
+  expect(result).toBe(expected);
 });
