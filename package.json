@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -40,8 +40,8 @@
     "test:licenses": "npx license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
     "test:unit": "npx vitest run --coverage",
     "test:watch": "npx vitest --watch",
-    "build": "npm run clean && npm run build:ncc",
-    "build:ncc": "npx ncc build src/index.ts --license licenses.txt",
+    "build": "npm run clean && npm run build:tsup",
+    "build:tsup": "npm run clean && tsup src --format esm,cjs --dts && mv dist lib",
     "clean": "rm -rf dist && mkdir -p dist",
     "package": "npm pack",
     "prepublishOnly": "npm run build",
@@ -51,7 +51,6 @@
     "@types/node": "latest",
     "@typescript-eslint/eslint-plugin": "8",
     "@typescript-eslint/parser": "8",
-    "@vercel/ncc": "0",
     "@vitest/coverage-v8": "2",
     "eslint": "8",
     "eslint-config-prettier": "9",
@@ -61,6 +60,7 @@
     "prettier": "3",
     "ts-node": "latest",
     "tslib": "latest",
+    "tsup": "8",
     "type-coverage": "2",
     "typescript": "5",
     "vitest": "2"
