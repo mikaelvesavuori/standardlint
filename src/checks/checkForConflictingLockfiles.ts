@@ -7,12 +7,16 @@ import { exists } from '../utils/exists';
 /**
  * @description Checks if there are conflicting Node package lock files.
  */
-export function checkForConflictingLockfiles(severity: Severity, basePath: string): CheckResult {
+export function checkForConflictingLockfiles(
+  severity: Severity,
+  basePath: string,
+  filetreePaths?: string[]
+): CheckResult {
   const name = 'Lock files';
   const message = 'Check for conflicting lock files';
 
-  const npmLockfile = exists(basePath, 'package-lock.json');
-  const yarnLockfile = exists(basePath, 'yarn.lock');
+  const npmLockfile = exists(basePath, 'package-lock.json', filetreePaths);
+  const yarnLockfile = exists(basePath, 'yarn.lock', filetreePaths);
 
   const result = !(npmLockfile && yarnLockfile);
 

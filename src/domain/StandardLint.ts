@@ -26,27 +26,63 @@ import { checkForThrowingPlainErrors } from '../checks/checkForThrowingPlainErro
 
 import { exists } from '../utils/exists';
 
-import { MissingChecksError } from '../application/errors/errors';
+import { InvalidFiletreeError, MissingChecksError } from '../application/errors/errors';
 import { writeResultsToDisk } from '../utils/writeResultsToDisk';
 
 /**
  * @description Factory function to return a new `StandardLint` instance.
  */
-export function createNewStandardLint(config?: ConfigurationInput) {
-  return new StandardLint(config);
+export function createNewStandardLint(config?: ConfigurationInput, filetree?: string[]) {
+  return new StandardLint(config, filetree);
 }
 
 /**
  * @description `StandardLint` is an extensible standards linter and auditor.
+ *
+ * If you want to use a static representation of paths rather than actually checking
+ * on disk, then this is possible using the `filetree` parameter.
+ *
+ * @example
+ * import { createNewStandardLint } from 'standardlint';
+ *
+ * const config = {
+ *   checks: [
+ *     { name: 'checkForPresenceContributing', severity: 'warn' },
+ *     { name: 'checkForPresenceLicense', severity: 'error' }
+ *   ]
+ * };
+ *
+ * const standardLint = createNewStandardLint(config);
+ * const results = standardLint.check();
+
+ * @example
+ * const standardlint = createNewStandardLint(config, ['path/to/file.js']);
  */
 class StandardLint {
   private readonly defaultBasePathFallback = '.';
   private readonly defaultSeverityFallback = 'error';
   private readonly defaultIgnorePathsFallback = [];
   readonly config: Configuration;
+  private readonly filetree: string[] = [];
 
-  constructor(config?: ConfigurationInput) {
+  constructor(config?: ConfigurationInput, filetree?: string[]) {
     this.config = this.makeConfig(config);
+
+    if (filetree) {
+      if (this.validateFiletree(filetree)) this.filetree = filetree;
+      else throw new InvalidFiletreeError();
+    }
+  }
+
+  /**
+   * @description Validate that the filetree is a non-empty array with only strings.
+   */
+  private validateFiletree(filetree: string[]) {
+    if (filetree && Array.isArray(filetree) && filetree.length > 0) {
+      if (filetree.every((path) => typeof path === 'string')) return true;
+    }
+
+    return false;
   }
 
   /**
@@ -191,7 +227,7 @@ class StandardLint {
 
     const checksList: any = {
       checkForConflictingLockfiles: () =>
-        checkForConflictingLockfiles(severity, this.config.basePath),
+        checkForConflictingLockfiles(severity, this.config.basePath, this.filetree),
       checkForConsoleUsage: () =>
         checkForConsoleUsage(severity, this.config.basePath, path, ignorePaths),
       checkForDefinedRelations: () =>
@@ -200,26 +236,31 @@ class StandardLint {
         checkForDefinedServiceLevelObjectives(severity, this.config.basePath, path),
       checkForDefinedTags: () => checkForDefinedTags(severity, this.config.basePath, path),
       checkForPresenceApiSchema: () =>
-        checkForPresenceApiSchema(severity, this.config.basePath, path),
-      checkForPresenceChangelog: () => checkForPresenceChangelog(severity, this.config.basePath),
+        checkForPresenceApiSchema(severity, this.config.basePath, path, this.filetree),
+      checkForPresenceChangelog: () =>
+        checkForPresenceChangelog(severity, this.config.basePath, this.filetree),
       checkForPresenceCiConfig: () =>
-        checkForPresenceCiConfig(severity, this.config.basePath, path),
-      checkForPresenceCodeowners: () => checkForPresenceCodeowners(severity, this.config.basePath),
+        checkForPresenceCiConfig(severity, this.config.basePath, path, this.filetree),
+      checkForPresenceCodeowners: () =>
+        checkForPresenceCodeowners(severity, this.config.basePath, this.filetree),
       checkForPresenceContributing: () =>
-        checkForPresenceContributing(severity, this.config.basePath),
+        checkForPresenceContributing(severity, this.config.basePath, this.filetree),
       checkForPresenceDiagramsFolder: () =>
-        checkForPresenceDiagramsFolder(severity, this.config.basePath, path),
+        checkForPresenceDiagramsFolder(severity, this.config.basePath, path, this.filetree),
       checkForPresenceIacConfig: () =>
-        checkForPresenceIacConfig(severity, this.config.basePath, path),
-      checkForPresenceLicense: () => checkForPresenceLicense(severity, this.config.basePath),
-      checkForPresenceReadme: () => checkForPresenceReadme(severity, this.config.basePath),
-      checkForPresenceSecurity: () => checkForPresenceSecurity(severity, this.config.basePath),
+        checkForPresenceIacConfig(severity, this.config.basePath, path, this.filetree),
+      checkForPresenceLicense: () =>
+        checkForPresenceLicense(severity, this.config.basePath, this.filetree),
+      checkForPresenceReadme: () =>
+        checkForPresenceReadme(severity, this.config.basePath, this.filetree),
+      checkForPresenceSecurity: () =>
+        checkForPresenceSecurity(severity, this.config.basePath, this.filetree),
       checkForPresenceServiceMetadata: () =>
-        checkForPresenceServiceMetadata(severity, this.config.basePath, path),
+        checkForPresenceServiceMetadata(severity, this.config.basePath, path, this.filetree),
       checkForPresenceTemplateIssues: () =>
-        checkForPresenceTemplateIssues(severity, this.config.basePath, path),
+        checkForPresenceTemplateIssues(severity, this.config.basePath, path, this.filetree),
       checkForPresenceTemplatePullRequests: () =>
-        checkForPresenceTemplatePullRequests(severity, this.config.basePath, path),
+        checkForPresenceTemplatePullRequests(severity, this.config.basePath, path, this.filetree),
       checkForPresenceTests: () =>
         checkForPresenceTests(severity, this.config.basePath, path, ignorePaths),
       checkForThrowingPlainErrors: () =>

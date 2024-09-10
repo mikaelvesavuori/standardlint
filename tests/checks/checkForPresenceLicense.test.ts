@@ -14,6 +14,21 @@ test('It should pass when finding a LICENSE file', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding a LICENSE file and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceLicense']
+    },
+    ['testdata/LICENSE.md']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

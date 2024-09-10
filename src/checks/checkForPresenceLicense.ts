@@ -7,12 +7,16 @@ import { exists } from '../utils/exists';
 /**
  * @description Checks if there is a `LICENSE.md` file.
  */
-export function checkForPresenceLicense(severity: Severity, basePath: string): CheckResult {
+export function checkForPresenceLicense(
+  severity: Severity,
+  basePath: string,
+  filetreePaths?: string[]
+): CheckResult {
   const path = 'LICENSE.md';
   const name = 'License';
   const message = 'Check for LICENSE file';
 
-  const result = exists(basePath, path);
+  const result = exists(basePath, path, filetreePaths);
 
   return {
     name,

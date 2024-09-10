@@ -14,6 +14,21 @@ test('It should pass when finding a GitHub Pull Request template', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding a GitHub Pull Request template and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceTemplatePullRequests']
+    },
+    ['testdata/.github/ISSUE_TEMPLATE/pull_request.md']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

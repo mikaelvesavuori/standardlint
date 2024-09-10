@@ -14,6 +14,21 @@ test('It should pass when finding an Infrastructure-as-Code configuration', () =
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding an Infrastructure-as-Code configuration and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceIacConfig']
+    },
+    ['testdata/serverless.yml']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

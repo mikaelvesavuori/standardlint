@@ -14,6 +14,21 @@ test('It should pass when finding a GitHub issue template', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding a GitHub issue template and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceTemplateIssues']
+    },
+    ['testdata/.github/ISSUE_TEMPLATE/issue.md']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

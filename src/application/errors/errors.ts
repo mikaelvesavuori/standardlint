@@ -9,3 +9,15 @@ export class MissingChecksError extends Error {
     this.message = message;
   }
 }
+
+/**
+ * @description Used when StandardLint receives an invalid or zero-length filetree.
+ */
+export class InvalidFiletreeError extends Error {
+  constructor() {
+    super();
+    this.name = 'InvalidFiletreeError';
+    const message = `Invalid filetree provided: Must contain at least 1 string if a filetree is to be used.`;
+    this.message = message;
+  }
+}

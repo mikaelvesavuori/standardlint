@@ -11,7 +11,8 @@ import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 export function checkForPresenceServiceMetadata(
   severity: Severity,
   basePath: string,
-  customPath?: string
+  customPath?: string,
+  filetreePaths?: string[]
 ): CheckResult {
   const path = customPath || 'manifest.json';
   const name = 'Service metadata';
@@ -19,7 +20,7 @@ export function checkForPresenceServiceMetadata(
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = exists(basePath, path);
+  const result = exists(basePath, path, filetreePaths);
 
   return {
     name,

@@ -1,0 +1,61 @@
+{
+  "sha": "9a9e512c9d97d24495b1a8c9c6c93f71a1e42229",
+  "url": "https://api.github.com/repos/{owner}/{repo}/git/trees/9a9e512c9d97d24495b1a8c9c6c93f71a1e42229",
+  "tree": [
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f01c13c1fba8b6b6adf1c99c9c8e3c8b9b936d9",
+      "size": 132,
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/blobs/3f01c13c1fba8b6b6adf1c99c9c8e3c8b9b936d9"
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b00b73e69b29948e5b2ba6faedc7b55fda8cbf0a",
+      "size": 670,
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/blobs/b00b73e69b29948e5b2ba6faedc7b55fda8cbf0a"
+    },
+    {
+      "path": "package-lock.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b00b73e69b29948e5b2ba6faedc7b55fda8cbf0a",
+      "size": 670,
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/blobs/b00b73e69b29948e5b2ba6faedc7b55fda8cbf0a"
+    },
+    {
+      "path": "src/index.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1f1b9f2485369e3484a9c474d8b38c8e7b81643",
+      "size": 202,
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/blobs/d1f1b9f2485369e3484a9c474d8b38c8e7b81643"
+    },
+    {
+      "path": "src/utils",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c1b4f242dd0f68c64f87617d89f8b6fc30a3d87b",
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/trees/c1b4f242dd0f68c64f87617d89f8b6fc30a3d87b"
+    },
+    {
+      "path": "src/utils/helpers.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7a27b66dd8d7a2f7166a2e6462c7a6f6f50e6bd",
+      "size": 342,
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/blobs/c7a27b66dd8d7a2f7166a2e6462c7a6f6f50e6bd"
+    },
+    {
+      "path": "node_modules",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e2b4e3d8d4f70edc87e77bc9bfe9d8ebfe7a6dfc",
+      "url": "https://api.github.com/repos/{owner}/{repo}/git/trees/e2b4e3d8d4f70edc87e77bc9bfe9d8ebfe7a6dfc"
+    }
+  ],
+  "truncated": false
+}

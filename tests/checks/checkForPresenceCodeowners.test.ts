@@ -14,6 +14,21 @@ test('It should pass when finding a CODEOWNERS file', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding a CODEOWNERS file and using a CODEOWNERS file', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceCodeowners']
+    },
+    ['testdata/CODEOWNERS']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

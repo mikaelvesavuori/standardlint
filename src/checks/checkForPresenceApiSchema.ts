@@ -11,7 +11,8 @@ import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 export function checkForPresenceApiSchema(
   severity: Severity,
   basePath: string,
-  customPath?: string
+  customPath?: string,
+  filetreePaths?: string[]
 ): CheckResult {
   const path = customPath || 'api/schema.json';
   const name = 'API schema';
@@ -19,7 +20,7 @@ export function checkForPresenceApiSchema(
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = exists(basePath, path);
+  const result = exists(basePath, path, filetreePaths);
 
   return {
     name,

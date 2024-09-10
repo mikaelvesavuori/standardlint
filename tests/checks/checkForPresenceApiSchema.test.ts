@@ -14,6 +14,21 @@ test('It should pass when finding an API schema', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding an API schema and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceApiSchema']
+    },
+    ['testdata/api/schema.json']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

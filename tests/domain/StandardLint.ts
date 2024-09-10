@@ -2,7 +2,8 @@ import { test, expect } from 'vitest';
 import fs from 'fs';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
-import { MissingChecksError } from '../../src/application/errors/errors';
+
+import { InvalidFiletreeError, MissingChecksError } from '../../src/application/errors/errors';
 
 test('It should check the provided checks', () => {
   const standardlint = createNewStandardLint({
@@ -301,4 +302,19 @@ test('It should throw a MissingChecksError if no checks are requested', () => {
   const standardlint = createNewStandardLint({ checks: [] });
 
   expect(() => standardlint.check()).toThrowError(MissingChecksError);
+});
+
+test('It should throw an InvalidFiletreeError for non-string array input', () => {
+  const invalidInputs = [1, [], [1, 'x', {}], 'asdf', () => 1, {}, { x: 1 }, new Function()];
+
+  for (const input of invalidInputs) {
+    expect(() =>
+      createNewStandardLint(
+        {
+          checks: ['all']
+        },
+        input as any
+      )
+    ).toThrowError(InvalidFiletreeError);
+  }
 });

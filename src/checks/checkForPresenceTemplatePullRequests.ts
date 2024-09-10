@@ -11,7 +11,8 @@ import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 export function checkForPresenceTemplatePullRequests(
   severity: Severity,
   basePath: string,
-  customPath?: string
+  customPath?: string,
+  filetreePaths?: string[]
 ): CheckResult {
   const path = customPath || '.github/ISSUE_TEMPLATE/pull_request.md';
   const name = 'PR template';
@@ -19,7 +20,7 @@ export function checkForPresenceTemplatePullRequests(
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = exists(basePath, path);
+  const result = exists(basePath, path, filetreePaths);
 
   return {
     name,

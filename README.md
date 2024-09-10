@@ -65,13 +65,13 @@ The format is:
 }
 ```
 
-| Key               | Required | Default         | Example                       | Description                                                             |
-| ----------------- | -------- | --------------- | ----------------------------- | ----------------------------------------------------------------------- |
-| `basePath`        | No       | `.`             | `./project_dir/`              | Sets the base path for any file lookups.                                |
-| `ignorePaths`        | No       | `[]`             | `["/tests/", "/src/problematic-file.ts"]`              | Paths that will be ignored for some checks. Does not support globbing.                                |
-| `checks`          | Yes      | -               | `["checkForPresenceLicense"]` | A list of checks to run, either using string or object form.            |
-| `defaultSeverity` | No       | `error`         | `warn`                        | Sets the default severity level for any issues.                         |
-| `path`            | No       | Multiple values | `api/schema.yml`              | Sets the exact path to a resource. Only used optionally by some checks. |
+| Key               | Required | Default         | Example                                   | Description                                                             |
+| ----------------- | -------- | --------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| `basePath`        | No       | `.`             | `./project_dir/`                          | Sets the base path for any file lookups.                                |
+| `ignorePaths`     | No       | `[]`            | `["/tests/", "/src/problematic-file.ts"]` | Paths that will be ignored for some checks. Does not support globbing.  |
+| `checks`          | Yes      | -               | `["checkForPresenceLicense"]`             | A list of checks to run, either using string or object form.            |
+| `defaultSeverity` | No       | `error`         | `warn`                                    | Sets the default severity level for any issues.                         |
+| `path`            | No       | Multiple values | `api/schema.yml`                          | Sets the exact path to a resource. Only used optionally by some checks. |
 
 #### Base path
 
@@ -142,6 +142,14 @@ const standardLint = createNewStandardLint(config);
 const results = standardLint.check();
 
 console.log(results);
+```
+
+#### Using static file trees instead of reading from disk
+
+If you want to use a static representation of paths rather than actually checking on disk, then this is possible using the `filetree` parameter.
+
+```ts
+const standardlint = createNewStandardLint(config, ['path/to/file.js']);
 ```
 
 ##### Outputting results into a JSON file

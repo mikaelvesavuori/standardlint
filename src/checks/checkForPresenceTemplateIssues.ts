@@ -11,7 +11,8 @@ import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 export function checkForPresenceTemplateIssues(
   severity: Severity,
   basePath: string,
-  customPath?: string
+  customPath?: string,
+  filetreePaths?: string[]
 ): CheckResult {
   const path = customPath || '.github/ISSUE_TEMPLATE/issue.md';
   const name = 'Issue template';
@@ -19,7 +20,7 @@ export function checkForPresenceTemplateIssues(
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const result = exists(basePath, path);
+  const result = exists(basePath, path, filetreePaths);
 
   return {
     name,

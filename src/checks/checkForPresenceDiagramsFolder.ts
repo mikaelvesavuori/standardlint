@@ -12,7 +12,8 @@ import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 export function checkForPresenceDiagramsFolder(
   severity: Severity,
   basePath: string,
-  customPath?: string
+  customPath?: string,
+  filetreePaths?: string[]
 ): CheckResult {
   const path = customPath || 'diagrams';
   const name = 'Diagrams';
@@ -23,13 +24,9 @@ export function checkForPresenceDiagramsFolder(
   const result = (() => {
     const diagramsPath = `${basePath}/${path}`;
 
-    if (exists(diagramsPath)) {
-      const contents = readDirectory(diagramsPath);
-      const diagramMatches = contents
-        .map((fileName: string) => fileName.endsWith('.drawio'))
-        .filter((match: boolean) => match);
-      return diagramMatches.length > 0;
-    }
+    if (filetreePaths && filetreePaths.length > 0)
+      return hasDiagramMatches(filetreePaths, diagramsPath.replace('./', ''));
+    else if (exists(diagramsPath, '')) return hasDiagramMatches(readDirectory(diagramsPath));
 
     return false;
   })();
@@ -41,3 +38,8 @@ export function checkForPresenceDiagramsFolder(
     path
   };
 }
+
+const hasDiagramMatches = (contents: string[], startPath: string = '') =>
+  contents
+    .map((fileName: string) => fileName.startsWith(startPath) && fileName.endsWith('.drawio'))
+    .filter((match: boolean) => match).length > 0;

@@ -14,6 +14,21 @@ test('It should pass when finding a folder with solution diagrams', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding a folder with solution diagrams and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceDiagramsFolder']
+    },
+    ['testdata/diagrams/demo.drawio']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */

@@ -14,6 +14,21 @@ test('It should pass when finding a CONTRIBUTING file', () => {
   expect(result).toBe(expected);
 });
 
+test('It should pass when finding a CONTRIBUTING file and using a filetree', () => {
+  const expected = 'pass';
+
+  const standardlint = createNewStandardLint(
+    {
+      basePath: './testdata',
+      checks: ['checkForPresenceContributing']
+    },
+    ['testdata/CONTRIBUTING.md']
+  );
+  const result = standardlint.check().results?.[0]?.status;
+
+  expect(result).toBe(expected);
+});
+
 /**
  * NEGATIVE TESTS
  */
