@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -16,7 +16,8 @@
     "auditor",
     "engops"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.cjs",
+  "module": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mikaelvesavuori/standardlint"
@@ -25,9 +26,15 @@
     "url": "https://github.com/mikaelvesavuori/standardlint/issues"
   },
   "homepage": "https://github.com/mikaelvesavuori/standardlint",
+  "exports": {
+    ".": {
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.js"
+    }
+  },
   "files": [
-    "/dist",
-    "!/dist/**/*.map",
+    "/lib",
+    "!/lib/**/*.map",
     "!/tests"
   ],
   "bin": {
