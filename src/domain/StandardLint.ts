@@ -1,5 +1,15 @@
-import { CheckResult, Check, Severity, CheckInput, IgnorePath } from '../interface/Check';
-import { Configuration, ConfigurationInput, Result } from '../interface/StandardLint';
+import type {
+  Check,
+  CheckInput,
+  CheckResult,
+  IgnorePath,
+  Severity
+} from '../interface/Check';
+import type {
+  Configuration,
+  ConfigurationInput,
+  Result
+} from '../interface/StandardLint';
 
 import { getStatusCount } from '../application/getStatusCount';
 
@@ -26,13 +36,19 @@ import { checkForThrowingPlainErrors } from '../checks/checkForThrowingPlainErro
 
 import { exists } from '../utils/exists';
 
-import { InvalidFiletreeError, MissingChecksError } from '../application/errors/errors';
+import {
+  InvalidFiletreeError,
+  MissingChecksError
+} from '../application/errors/errors';
 import { writeResultsToDisk } from '../utils/writeResultsToDisk';
 
 /**
  * @description Factory function to return a new `StandardLint` instance.
  */
-export function createNewStandardLint(config?: ConfigurationInput, filetree?: string[]) {
+export function createNewStandardLint(
+  config?: ConfigurationInput,
+  filetree?: string[]
+) {
   return new StandardLint(config, filetree);
 }
 
@@ -102,8 +118,14 @@ class StandardLint {
       ? this.getSanitizedPaths(configInput.ignorePaths)
       : this.defaultIgnorePathsFallback;
 
-    const checkList = Array.isArray(configInput?.checks) ? configInput?.checks : [];
-    const checks = this.getValidatedChecks(checkList as CheckInput[], defaultSeverity, ignorePaths);
+    const checkList = Array.isArray(configInput?.checks)
+      ? configInput?.checks
+      : [];
+    const checks = this.getValidatedChecks(
+      checkList as CheckInput[],
+      defaultSeverity,
+      ignorePaths
+    );
 
     return {
       basePath,
@@ -168,8 +190,9 @@ class StandardLint {
     const isValidCheckName = (name: string) => validCheckNames.includes(name);
 
     if (checks.includes('all')) {
+      // biome-ignore lint: It's OK, don't error here
       checks = validCheckNames;
-      checks.shift();
+      validCheckNames.shift();
     }
 
     const validatedChecks: Check[] = checks
@@ -185,7 +208,9 @@ class StandardLint {
           return <Check>{
             name: check.name,
             path: check.path || '',
-            severity: this.getValidatedSeverityLevel(check.severity || defaultSeverity),
+            severity: this.getValidatedSeverityLevel(
+              check.severity || defaultSeverity
+            ),
             ignorePaths
           };
 
@@ -205,7 +230,9 @@ class StandardLint {
   public check(writeOutputToDisk = false): Result {
     if (this.config.checks.length === 0) throw new MissingChecksError();
 
-    const results: CheckResult[] = this.config.checks.map((check: Check) => this.test(check));
+    const results: CheckResult[] = this.config.checks.map((check: Check) =>
+      this.test(check)
+    );
 
     const checkResults = {
       passes: getStatusCount('pass', results),
@@ -227,28 +254,69 @@ class StandardLint {
 
     const checksList: any = {
       checkForConflictingLockfiles: () =>
-        checkForConflictingLockfiles(severity, this.config.basePath, this.filetree),
+        checkForConflictingLockfiles(
+          severity,
+          this.config.basePath,
+          this.filetree
+        ),
       checkForConsoleUsage: () =>
         checkForConsoleUsage(severity, this.config.basePath, path, ignorePaths),
       checkForDefinedRelations: () =>
         checkForDefinedRelations(severity, this.config.basePath, path),
       checkForDefinedServiceLevelObjectives: () =>
-        checkForDefinedServiceLevelObjectives(severity, this.config.basePath, path),
-      checkForDefinedTags: () => checkForDefinedTags(severity, this.config.basePath, path),
+        checkForDefinedServiceLevelObjectives(
+          severity,
+          this.config.basePath,
+          path
+        ),
+      checkForDefinedTags: () =>
+        checkForDefinedTags(severity, this.config.basePath, path),
       checkForPresenceApiSchema: () =>
-        checkForPresenceApiSchema(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceApiSchema(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceChangelog: () =>
-        checkForPresenceChangelog(severity, this.config.basePath, this.filetree),
+        checkForPresenceChangelog(
+          severity,
+          this.config.basePath,
+          this.filetree
+        ),
       checkForPresenceCiConfig: () =>
-        checkForPresenceCiConfig(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceCiConfig(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceCodeowners: () =>
-        checkForPresenceCodeowners(severity, this.config.basePath, this.filetree),
+        checkForPresenceCodeowners(
+          severity,
+          this.config.basePath,
+          this.filetree
+        ),
       checkForPresenceContributing: () =>
-        checkForPresenceContributing(severity, this.config.basePath, this.filetree),
+        checkForPresenceContributing(
+          severity,
+          this.config.basePath,
+          this.filetree
+        ),
       checkForPresenceDiagramsFolder: () =>
-        checkForPresenceDiagramsFolder(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceDiagramsFolder(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceIacConfig: () =>
-        checkForPresenceIacConfig(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceIacConfig(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceLicense: () =>
         checkForPresenceLicense(severity, this.config.basePath, this.filetree),
       checkForPresenceReadme: () =>
@@ -256,15 +324,40 @@ class StandardLint {
       checkForPresenceSecurity: () =>
         checkForPresenceSecurity(severity, this.config.basePath, this.filetree),
       checkForPresenceServiceMetadata: () =>
-        checkForPresenceServiceMetadata(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceServiceMetadata(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceTemplateIssues: () =>
-        checkForPresenceTemplateIssues(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceTemplateIssues(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceTemplatePullRequests: () =>
-        checkForPresenceTemplatePullRequests(severity, this.config.basePath, path, this.filetree),
+        checkForPresenceTemplatePullRequests(
+          severity,
+          this.config.basePath,
+          path,
+          this.filetree
+        ),
       checkForPresenceTests: () =>
-        checkForPresenceTests(severity, this.config.basePath, path, ignorePaths),
+        checkForPresenceTests(
+          severity,
+          this.config.basePath,
+          path,
+          ignorePaths
+        ),
       checkForThrowingPlainErrors: () =>
-        checkForThrowingPlainErrors(severity, this.config.basePath, path, ignorePaths)
+        checkForThrowingPlainErrors(
+          severity,
+          this.config.basePath,
+          path,
+          ignorePaths
+        )
     };
 
     const result = checksList[name]();

@@ -1,10 +1,10 @@
-import { CheckResult, Severity } from '../interface/Check';
+import type { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
 import { exists } from '../utils/exists';
-import { readDirectory } from '../utils/readDirectory';
 import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
+import { readDirectory } from '../utils/readDirectory';
 
 /**
  * @description Checks if there is a diagrams folder with diagram files in it.
@@ -26,7 +26,8 @@ export function checkForPresenceDiagramsFolder(
 
     if (filetreePaths && filetreePaths.length > 0)
       return hasDiagramMatches(filetreePaths, diagramsPath.replace('./', ''));
-    else if (exists(diagramsPath, '')) return hasDiagramMatches(readDirectory(diagramsPath));
+    if (exists(diagramsPath, ''))
+      return hasDiagramMatches(readDirectory(diagramsPath));
 
     return false;
   })();
@@ -39,7 +40,10 @@ export function checkForPresenceDiagramsFolder(
   };
 }
 
-const hasDiagramMatches = (contents: string[], startPath: string = '') =>
+const hasDiagramMatches = (contents: string[], startPath = '') =>
   contents
-    .map((fileName: string) => fileName.startsWith(startPath) && fileName.endsWith('.drawio'))
+    .map(
+      (fileName: string) =>
+        fileName.startsWith(startPath) && fileName.endsWith('.drawio')
+    )
     .filter((match: boolean) => match).length > 0;

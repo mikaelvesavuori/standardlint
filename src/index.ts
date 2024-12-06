@@ -7,11 +7,12 @@ import { getJSONFileContents } from './utils/getJSONFileContents';
 import { writeResultsToDisk } from './utils/writeResultsToDisk';
 
 function main() {
-  const isRunFromCommandLine =
-    process.argv[1] && process.argv[1].includes('node_modules/.bin/standardlint');
+  const isRunFromCommandLine = process.argv[1]?.includes(
+    'node_modules/.bin/standardlint'
+  );
   if (!isRunFromCommandLine) return;
 
-  const writeOutputToDisk = process.argv[2] && process.argv[2].includes('--output');
+  const writeOutputToDisk = process.argv[2]?.includes('--output');
 
   try {
     console.log('Running StandardLint...');

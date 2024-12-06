@@ -1,10 +1,10 @@
-import { CheckResult, Severity } from '../interface/Check';
+import type { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
-import { getAllFiles } from '../utils/getAllFiles';
 import { filterFiles } from '../utils/filterFiles';
+import { getAllFiles } from '../utils/getAllFiles';
+import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
  * @description Checks if there are tests.
@@ -23,7 +23,9 @@ export function checkForPresenceTests(
 
   const files = getAllFiles(`${basePath}/${path}`, []);
   const filteredFiles =
-    ignorePaths && ignorePaths.length > 0 ? filterFiles(files, ignorePaths) : files;
+    ignorePaths && ignorePaths.length > 0
+      ? filterFiles(files, ignorePaths)
+      : files;
 
   const tests = filteredFiles.filter(
     (file: string) =>

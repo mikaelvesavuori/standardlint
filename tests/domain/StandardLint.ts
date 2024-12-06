@@ -1,9 +1,12 @@
-import { test, expect } from 'vitest';
-import fs from 'fs';
+import fs from 'node:fs';
+import { expect, test } from 'vitest';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
-import { InvalidFiletreeError, MissingChecksError } from '../../src/application/errors/errors';
+import {
+  InvalidFiletreeError,
+  MissingChecksError
+} from '../../src/application/errors/errors';
 
 test('It should check the provided checks', () => {
   const standardlint = createNewStandardLint({
@@ -37,7 +40,9 @@ test('It should set the base path if the provided directory path exists', () => 
 test('It should set the base path to the fallback value if the directory does not exist', () => {
   const expected = '.';
 
-  const standardlint = createNewStandardLint({ basePath: 'jah3khg378fgag3f3a3' });
+  const standardlint = createNewStandardLint({
+    basePath: 'jah3khg378fgag3f3a3'
+  });
   const result = standardlint.config.basePath;
 
   expect(result).toBe(expected);
@@ -305,7 +310,16 @@ test('It should throw a MissingChecksError if no checks are requested', () => {
 });
 
 test('It should throw an InvalidFiletreeError for non-string array input', () => {
-  const invalidInputs = [1, [], [1, 'x', {}], 'asdf', () => 1, {}, { x: 1 }, new Function()];
+  const invalidInputs = [
+    1,
+    [],
+    [1, 'x', {}],
+    'asdf',
+    () => 1,
+    {},
+    { x: 1 },
+    new Function()
+  ];
 
   for (const input of invalidInputs) {
     expect(() =>

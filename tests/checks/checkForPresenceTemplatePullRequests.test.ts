@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest';
+import { expect, test } from 'vitest';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
@@ -50,7 +50,9 @@ test('It should error when missing a GitHub Pull Request template', () => {
 
   const standardlint = createNewStandardLint({
     basePath: './tests',
-    checks: [{ name: 'checkForPresenceTemplatePullRequests', severity: 'error' }]
+    checks: [
+      { name: 'checkForPresenceTemplatePullRequests', severity: 'error' }
+    ]
   });
   const result = standardlint.check().results?.[0]?.status;
 

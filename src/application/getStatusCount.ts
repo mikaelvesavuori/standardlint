@@ -1,4 +1,4 @@
-import { CheckResult } from '../interface/Check';
+import type { CheckResult } from '../interface/Check';
 
 /**
  * @description Gets the number of count for a given status.

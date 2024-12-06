@@ -1,11 +1,11 @@
-import { CheckResult, Severity } from '../interface/Check';
+import type { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
-import { getAllFiles } from '../utils/getAllFiles';
-import { readFile } from '../utils/readFile';
 import { filterFiles } from '../utils/filterFiles';
+import { getAllFiles } from '../utils/getAllFiles';
+import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
+import { readFile } from '../utils/readFile';
 
 /**
  * @description Checks if there is an API schema.
@@ -24,10 +24,14 @@ export function checkForConsoleUsage(
 
   const files = getAllFiles(`${basePath}/${path}`, []);
   const filteredFiles =
-    ignorePaths && ignorePaths.length > 0 ? filterFiles(files, ignorePaths) : files;
+    ignorePaths && ignorePaths.length > 0
+      ? filterFiles(files, ignorePaths)
+      : files;
 
   const regex = /console.(.*)/gi;
-  const includesConsole = filteredFiles.map((test: string) => regex.test(readFile(test)));
+  const includesConsole = filteredFiles.map((test: string) =>
+    regex.test(readFile(test))
+  );
   const result = !includesConsole.includes(true); // We don't want any occurrences
 
   return {

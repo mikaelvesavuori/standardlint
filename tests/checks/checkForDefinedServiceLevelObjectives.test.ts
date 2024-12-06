@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest';
+import { expect, test } from 'vitest';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
@@ -23,7 +23,9 @@ test('It should warn when finding no defined Service Level Objectives', () => {
 
   const standardlint = createNewStandardLint({
     basePath: './tests',
-    checks: [{ name: 'checkForDefinedServiceLevelObjectives', severity: 'warn' }]
+    checks: [
+      { name: 'checkForDefinedServiceLevelObjectives', severity: 'warn' }
+    ]
   });
   const result = standardlint.check().results?.[0]?.status;
 
@@ -35,7 +37,9 @@ test('It should error when finding no defined Service Level Objectives', () => {
 
   const standardlint = createNewStandardLint({
     basePath: './tests',
-    checks: [{ name: 'checkForDefinedServiceLevelObjectives', severity: 'error' }]
+    checks: [
+      { name: 'checkForDefinedServiceLevelObjectives', severity: 'error' }
+    ]
   });
   const result = standardlint.check().results?.[0]?.status;
 

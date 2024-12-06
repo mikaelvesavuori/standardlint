@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest';
+import { expect, test } from 'vitest';
 
 import { createNewStandardLint } from '../../src/domain/StandardLint';
 
@@ -62,7 +62,13 @@ test('It should error when using a non-existent directory', () => {
 
   const standardlint = createNewStandardLint({
     basePath: './tests',
-    checks: [{ name: 'checkForPresenceDiagramsFolder', severity: 'error', path: 'jklah3f98y' }]
+    checks: [
+      {
+        name: 'checkForPresenceDiagramsFolder',
+        severity: 'error',
+        path: 'jklah3f98y'
+      }
+    ]
   });
   const result = standardlint.check().results?.[0]?.status;
 

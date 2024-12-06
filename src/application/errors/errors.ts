@@ -5,7 +5,7 @@ export class MissingChecksError extends Error {
   constructor() {
     super();
     this.name = 'MissingChecksError';
-    const message = `Missing checks!`;
+    const message = 'Missing checks!';
     this.message = message;
   }
 }
@@ -17,7 +17,8 @@ export class InvalidFiletreeError extends Error {
   constructor() {
     super();
     this.name = 'InvalidFiletreeError';
-    const message = `Invalid filetree provided: Must contain at least 1 string if a filetree is to be used.`;
+    const message =
+      'Invalid filetree provided: Must contain at least 1 string if a filetree is to be used.';
     this.message = message;
   }
 }

@@ -1,4 +1,4 @@
-import { CheckResult, Severity } from '../interface/Check';
+import type { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 

@@ -1,7 +1,7 @@
 {
   "name": "standardlint",
   "description": "Extensible standards linter and auditor.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Mikael Vesavuori",
   "license": "MIT",
   "keywords": [
@@ -38,11 +38,10 @@
     "!/tests"
   ],
   "bin": {
-    "standardlint": "dist/index.js"
+    "standardlint": "lib/index.js"
   },
   "scripts": {
-    "start": "npx ts-node src/test.ts",
-    "test": "npm run test:licenses && npm run test:types && npm run test:unit",
+    "test": "npm run test:licenses && npm run test:types && npm run lint && npm run test:unit",
     "test:types": "npx type-coverage --at-least 97 --strict --ignore-files \"tests/**/*.ts\" --ignore-files \"*.ts\" --ignore-files \"src/application/errors/*.ts\" --ignore-files \"testdata/*.ts\"",
     "test:licenses": "npx license-compliance --direct --allow 'MIT;ISC;0BSD;BSD-2-Clause;BSD-3-Clause;Apache-2.0;Unlicense;CC0-1.0'",
     "test:unit": "npx vitest run --coverage",
@@ -50,21 +49,17 @@
     "build": "npm run clean && npm run build:tsup",
     "build:tsup": "npm run clean && tsup src --format esm,cjs --dts && mv dist lib",
     "clean": "rm -rf dist && mkdir -p dist",
+    "lint": "npx @biomejs/biome check --write ./src ./tests",
     "package": "npm pack",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "@biomejs/biome": "1",
     "@types/node": "latest",
-    "@typescript-eslint/eslint-plugin": "8",
-    "@typescript-eslint/parser": "8",
     "@vitest/coverage-v8": "2",
-    "eslint": "8",
-    "eslint-config-prettier": "9",
-    "eslint-plugin-prettier": "5",
     "husky": "9",
     "license-compliance": "latest",
-    "prettier": "3",
-    "ts-node": "latest",
+    "tsx": "latest",
     "tslib": "latest",
     "tsup": "8",
     "type-coverage": "2",

@@ -1,9 +1,9 @@
-import { CheckResult, Severity } from '../interface/Check';
+import type { CheckResult, Severity } from '../interface/Check';
 
 import { calculatePass } from '../application/calculatePass';
 
-import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 import { getJSONFileContents } from '../utils/getJSONFileContents';
+import { logDefaultPathMessage } from '../utils/logDefaultPathMessage';
 
 /**
  * @description Checks if the service metadata defines Service Level Objectives.
@@ -19,9 +19,12 @@ export function checkForDefinedServiceLevelObjectives(
 
   if (!customPath) logDefaultPathMessage(name, path);
 
-  const serviceMetadata: Record<string, any> = getJSONFileContents(basePath, path);
+  const serviceMetadata: Record<string, any> = getJSONFileContents(
+    basePath,
+    path
+  );
 
-  const result = serviceMetadata && serviceMetadata?.slo && serviceMetadata?.slo.length > 0;
+  const result = serviceMetadata?.slo && serviceMetadata?.slo.length > 0;
 
   return {
     name,

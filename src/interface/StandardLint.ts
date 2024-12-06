@@ -1,4 +1,10 @@
-import { Check, CheckInput, CheckResult, IgnorePath, Severity } from './Check';
+import type {
+  Check,
+  CheckInput,
+  CheckResult,
+  IgnorePath,
+  Severity
+} from './Check';
 
 /**
  * @description The `StandardLint` configuration.
